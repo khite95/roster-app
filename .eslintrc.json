@@ -1,0 +1,27 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["prettier", "prettier/react"],
+  "plugins": ["react", "prettier"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "ecmaVersion": 6,
+      "impliedStrict": true
+    }
+  },
+  "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "jsx-a11y/href-no-hash": [0], 
+    "linebreak-style": 0
+  },
+  "env": {
+    "browser": true,
+    "mocha": true,
+    "jest": true,
+    "es6": true
+  },
+  "globals": {
+    "Cypress": true,
+    "cy": true
+  }
+}
