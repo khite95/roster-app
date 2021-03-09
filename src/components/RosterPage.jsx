@@ -11,6 +11,13 @@ class RosterPage extends React.Component {
     this.props.getAllPlayers();
   }
 
+  // componentDidUpdate(prevProps) {
+  //   // Typical usage (don't forget to compare props):
+  //   if (this.props !== prevProps) {
+  //     this.props.getAllPlayers();
+  //   }
+  // }
+
   render() {
     const { players } = this.props;
     return (
@@ -26,11 +33,10 @@ class RosterPage extends React.Component {
                     <h2>Player Roster</h2>
                     <br />
                     <div className="form-group mb-3">
-                      {console.log(players)}
-                      {players.items && !players.loading && (
+                      {players.items && (
                         <Table hover>
                           <thead>
-                            <tr>
+                            <tr key="Players">
                               <th>#</th>
                               <th>First Name</th>
                               <th>Last Name</th>
@@ -39,26 +45,31 @@ class RosterPage extends React.Component {
                               <th>Player id</th>
                             </tr>
                           </thead>
-                          {players.items.players !== undefined &&
+                          {players.items.players &&
                             players.items.players.map((player, index) => (
                               <Player
+                                key={player.first_name}
                                 playerProp={player}
                                 handleDeletePlayer={() => {
-                                  this.props.handleDeletePlayer(player.id);
+                                  //this.props.handleDeletePlayer(player.id);
+                                  //use index instead since we are mocking data from api
+                                  this.props.handleDeletePlayer(index);
+                                  this.props.getAllPlayers();
                                 }}
                                 index={index}
                               />
                             ))}
-                          {players.items.players === undefined &&
+                          {/* {players.items.players === undefined &&
                             players.items.map((player, index) => (
                               <Player
                                 playerProp={player}
                                 handleDeletePlayer={() => {
-                                  this.props.handleDeletePlayer(player.id);
+                                  this.props.handleDeletePlayer(index);
+                                  this.props.getAllPlayers();
                                 }}
                                 index={index}
                               />
-                            ))}
+                            ))} */}
                         </Table>
                       )}
                     </div>

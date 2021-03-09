@@ -23,7 +23,7 @@ export class Header extends React.Component {
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary mt-4">
         <div className="container">
           <Link className="navbar-brand" to="/roster">
-            Alchemy Player App
+            Player App
           </Link>
           <button
             className="navbar-toggler"
@@ -74,9 +74,9 @@ export class Header extends React.Component {
               <li className="nav-item">
                 <a
                   className="nav-link"
-                  href="https://gitlab.com/kjh95/roster-app"
+                  href="https://github.com/khite95/roster-app"
                 >
-                  GitLab
+                  Github
                 </a>
               </li>
               <li className="nav-item dropdown">

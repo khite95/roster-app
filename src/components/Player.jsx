@@ -5,7 +5,7 @@ import './Login.css';
 export function Player({ playerProp, handleDeletePlayer, index }) {
   return (
     <tbody>
-      <tr key={playerProp.id}>
+      <tr key={playerProp.first_name}>
         <th scope="row">{index}</th>
         <td>{playerProp.first_name}</td>
         <td>{playerProp.last_name}</td>

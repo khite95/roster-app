@@ -19,33 +19,31 @@ export function players(state = {}, action) {
       if (state.items.players === undefined) {
         return {
           ...state,
-          items: state.items.map(
-            player =>
-              player.id === action.id ? { ...player, deleting: true } : player
+          items: state.items.map(player =>
+            player.id === action.id ? { ...player, deleting: true } : player
           )
         };
       } else {
         return {
           ...state,
-          items: state.items.players.map(
-            player =>
-              player.id === action.id ? { ...player, deleting: true } : player
+          items: state.items.players.map(player =>
+            player.id === action.id ? { ...player, deleting: true } : player
           )
         };
       }
-    case playerConstants.DELETE_SUCCESS:
-      // remove deleted player from state
-      if (state.items.players === undefined) {
-        return {
-          ...state,
-          items: state.items.filter(player => player.id !== action.id)
-        };
-      } else {
-        return {
-          ...state,
-          items: state.filter(player => player.id !== action.id)
-        };
-      }
+    // case playerConstants.DELETE_SUCCESS:
+    //   // remove deleted player from state
+    //   if (state.items.players === undefined) {
+    //     return {
+    //       ...state,
+    //       items: state.items.filter(player => player.id !== action.id)
+    //     };
+    //   } else {
+    //     return {
+    //       ...state,
+    //       items: state.filter(player => player.id !== action.id)
+    //     };
+    //   }
     case playerConstants.DELETE_FAILURE:
       // remove 'deleting:true' property and add 'deleteError:[error]' property to player
       if (state.items.players === undefined) {

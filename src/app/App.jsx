@@ -40,8 +40,6 @@ class App extends React.Component {
           {alert.message && (
             <div className={`alert ${alert.type}`}>{alert.message}</div>
           )}
-          <br />
-          <br />
           <BrowserRouter>
             <div>
               <Router history={history}>

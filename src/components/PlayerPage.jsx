@@ -122,7 +122,7 @@ class PlayerPage extends React.Component {
                             onChange={this.handleChange}
                             required
                           >
-                            <option selected label="Right" id="right">
+                            <option defaultValue label="Right" id="right">
                               Left
                             </option>
                             <option label="Left" id="left">
