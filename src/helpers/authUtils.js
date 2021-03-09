@@ -5,36 +5,32 @@ export const authUtils = {
   logout
 };
 
-function login(email, password) {
+async function login(email, password) {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password })
-    // body: {
-    //   email: 'test@test.com',
-    //   password: '123'
-    // }
   };
-  // body: {
-  //   success: true,
-  //   token:
-  //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1YjI0ZGFkYTMxMGQyMTdmZjM5MDEyYzAiLCJpYXQiOjE1MjkxNDE5Nzh9.Tm6dylTEN0mbx4Rxo5zDcS9Jo2yQx4zB0AxyxHiOdlc',
-  //   user: {
-  //     first_name: 'Kenny',
-  //     last_name: 'Hite',
-  //     email: 'test@test.com',
-  //     id: '5b24dada310d217ff39012c0',
-  //     password: '123'
-  //   }
-  //body: JSON.stringify({ email, password })
-  // setToken(requestOptions);
-  // return requestOptions;
 
-  return fetch(
-    `https://players-api.developer.alchemy.codes/api/login`,
-    requestOptions
-  )
-    .then(handleResponse)
+  const mockUser = {
+    success: true,
+    token:
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1YjI0ZGFkYTMxMGQyMTdmZjM5MDEyYzAiLCJpYXQiOjE1MjkxNDIxMTd9.GI4lu7HFB0j3mnsJwX2LjGmGOblUq-X0NnGqD2YRMt0',
+    user: {
+      first_name: 'Billy',
+      last_name: 'Bob',
+      email: 'billybob@example.com',
+      id: '5b24dada310d217ff39012c0'
+    }
+  };
+
+  //Used a promise to mock user login and then handle authentication
+  Promise.resolve(mockUser)
+    // return fetch(
+    //   `login api here`,
+    //   requestOptions
+    // )
+    //.then(handleResponse)
     .then(user => {
       // login successful if there's a jwt token in the response
       if (user.token) {

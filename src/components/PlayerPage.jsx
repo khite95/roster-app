@@ -40,6 +40,7 @@ class PlayerPage extends React.Component {
     this.setState({ submitted: true });
     const { player } = this.state;
     const { dispatch } = this.props;
+    console.log(player);
     if (
       player.first_name &&
       player.last_name &&

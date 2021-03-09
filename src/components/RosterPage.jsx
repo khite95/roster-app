@@ -27,41 +27,40 @@ class RosterPage extends React.Component {
                     <br />
                     <div className="form-group mb-3">
                       {console.log(players)}
-                      {players.items &&
-                        !players.loading && (
-                          <Table hover>
-                            <thead>
-                              <tr>
-                                <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Rating</th>
-                                <th>Handedness</th>
-                                <th>Player id</th>
-                              </tr>
-                            </thead>
-                            {players.items.players !== undefined &&
-                              players.items.players.map((player, index) => (
-                                <Player
-                                  playerProp={player}
-                                  handleDeletePlayer={() => {
-                                    this.props.handleDeletePlayer(player.id);
-                                  }}
-                                  index={index}
-                                />
-                              ))}
-                            {players.items.players === undefined &&
-                              players.items.map((player, index) => (
-                                <Player
-                                  playerProp={player}
-                                  handleDeletePlayer={() => {
-                                    this.props.handleDeletePlayer(player.id);
-                                  }}
-                                  index={index}
-                                />
-                              ))}
-                          </Table>
-                        )}
+                      {players.items && !players.loading && (
+                        <Table hover>
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th>First Name</th>
+                              <th>Last Name</th>
+                              <th>Rating</th>
+                              <th>Handedness</th>
+                              <th>Player id</th>
+                            </tr>
+                          </thead>
+                          {players.items.players !== undefined &&
+                            players.items.players.map((player, index) => (
+                              <Player
+                                playerProp={player}
+                                handleDeletePlayer={() => {
+                                  this.props.handleDeletePlayer(player.id);
+                                }}
+                                index={index}
+                              />
+                            ))}
+                          {players.items.players === undefined &&
+                            players.items.map((player, index) => (
+                              <Player
+                                playerProp={player}
+                                handleDeletePlayer={() => {
+                                  this.props.handleDeletePlayer(player.id);
+                                }}
+                                index={index}
+                              />
+                            ))}
+                        </Table>
+                      )}
                     </div>
                   </div>
                 </div>
