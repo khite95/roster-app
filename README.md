@@ -1,4 +1,4 @@
-# Alchemy Player Management App
+# Player Management App
 
 ## Overview
 
