@@ -19,27 +19,45 @@ function userCreateFailure(error) {
 }
 
 function create(user) {
-  return dispatch => {
+  return async dispatch => {
     dispatch(userCreateRequest(user));
 
-    userService.create(user).then(
-      newUser => {
-        dispatch(userCreateSuccess(newUser));
-        history.push('/roster');
-        dispatch(alertActions.success('Registration successful'));
-      },
-      error => {
-        dispatch(userCreateFailure(error.toString()));
-        dispatch(alertActions.error(error.toString()));
-      }
-    );
+    try {
+      const newUser = await userService.create(user);
+      dispatch(userCreateSuccess(newUser));
+      history.push('/roster');
+      dispatch(alertActions.success('Registration successful'));
+    } catch (error) {
+      dispatch(userCreateFailure(error.toString()));
+      dispatch(alertActions.error(error.toString()));
+    }
+
+    //   userService.create(user).then(
+    //     newUser => {
+    //       dispatch(userCreateSuccess(newUser));
+    //       history.push('/roster');
+    //       dispatch(alertActions.success('Registration successful'));
+    //     },
+    //     error => {
+    //       dispatch(userCreateFailure(error.toString()));
+    //       dispatch(alertActions.error(error.toString()));
+    //     }
+    //   );
+    // };
   };
 }
 
 function submitLogin(user) {
-  return dispatch => {
-    userActions
-      .create(user)
-      .then(dispatch(authActions.login(user.email, user.password)));
+  return async dispatch => {
+    try {
+      const submitUser = await create(user);
+      await dispatch(authActions.login(user.email, user.password));
+    } catch (error) {
+      console.log(error.toString());
+    }
+
+    // userActions
+    //   .create(user)
+    //   .then(dispatch(authActions.login(user.email, user.password)));
   };
 }

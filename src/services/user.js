@@ -23,18 +23,23 @@ async function create(user) {
     }
   };
 
+  if (createdUser.token) {
+    setToken(user);
+  }
+  return createdUser;
+
   // return fetch(
   //   `create user api here`,
   //   requestOptions
   // )
   // .then(handleResponse)
-  Promise.resolve(createdUser).then(user => {
-    // login successful if there's a jwt token in the response
-    if (user.token) {
-      setToken(user);
-    }
-    return user;
-  });
+  // Promise.resolve(createdUser).then(user => {
+  //   // login successful if there's a jwt token in the response
+  //   if (user.token) {
+  //     setToken(user);
+  //   }
+  //   return user;
+  // });
 }
 
 // store user details and jwt token in local storage to keep user logged in between page refreshes

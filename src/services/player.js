@@ -16,7 +16,6 @@ async function getAll() {
     method: 'GET',
     headers: generateAuthHeader()
   };
-  console.log(getLocalPlayers());
   // if (getLocalPlayers() !== null) {
   //   players = [...getLocalPlayers()];
   // }

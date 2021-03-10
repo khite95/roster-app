@@ -37,9 +37,10 @@ class App extends React.Component {
     return (
       <div className="container">
         <div className="text-center">
-          {alert.message && (
+          {/* Alerts */}
+          {/* {alert.message && (
             <div className={`alert ${alert.type}`}>{alert.message}</div>
-          )}
+          )} */}
           <BrowserRouter>
             <div>
               <Router history={history}>

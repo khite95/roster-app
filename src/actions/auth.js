@@ -18,19 +18,29 @@ function authFailure(error) {
 }
 
 function login(email, password) {
-  return dispatch => {
+  return async dispatch => {
     dispatch(authRequest({ email }));
 
-    authUtils.login(email, password).then(
-      user => {
-        dispatch(authSuccess(user));
-        history.push('/roster');
-      },
-      error => {
-        dispatch(authFailure(error.toString()));
-        dispatch(alertActions.error(error.toString()));
-      }
-    );
+    try {
+      const user = await authUtils.login(email, password);
+      dispatch(authSuccess(user));
+      history.push('/roster');
+    } catch (error) {
+      dispatch(authFailure(error.toString()));
+      dispatch(alertActions.error(error.toString()));
+    }
+
+    // authUtils.login(email, password).then(
+    //   user => {
+    //     dispatch(authSuccess(user));
+    //     console.log(user);
+    //     history.push('/roster');
+    //   },
+    //   error => {
+    //     dispatch(authFailure(error.toString()));
+    //     dispatch(alertActions.error(error.toString()));
+    //   }
+    // );
   };
 }
 

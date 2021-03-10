@@ -23,21 +23,26 @@ async function login(email, password) {
       id: '5b24dada310d217ff39012c0'
     }
   };
-
+  if (mockUser.token) {
+    setToken(mockUser);
+  }
+  return mockUser;
   //Used a promise to mock user login and then handle authentication
-  Promise.resolve(mockUser)
-    // return fetch(
-    //   `login api here`,
-    //   requestOptions
-    // )
-    //.then(handleResponse)
-    .then(user => {
-      // login successful if there's a jwt token in the response
-      if (user.token) {
-        setToken(user);
-      }
-      return user;
-    });
+  // return (
+  //   mockUser
+  //     // return fetch(
+  //     //   `login api here`,
+  //     //   requestOptions
+  //     // )
+  //     //.then(handleResponse)
+  //     .then(user => {
+  //       // login successful if there's a jwt token in the response
+  //       if (user.token) {
+  //         setToken(user);
+  //       }
+  //       return user;
+  //     })
+  // );
 }
 
 // remove user from local storage to log user out
