@@ -1,7 +1,7 @@
 DONE - 1) Fix all broken endpoints by returning local data wrapped in promises --YOUR APP SHOULD ROUGHLY FUNCTION AGAIN AT THIS POINT--
 DONE - 2) Replace all code involving promises, or 'then/catch' with async await (we can work on this together if you have questions)
-3) Go back to the original goal of cleaning up your render code (DO NOT START WITH HOOKS YET)
-4) If you reach this point, everything will be refactored, and you can start converting all of your react classes to hook based counterparts
+DONE - 3) Go back to the original goal of cleaning up your render code (DO NOT START WITH HOOKS YET)
+DONE - 4) If you reach this point, everything will be refactored, and you can start converting all of your react classes to hook based counterparts
 5) introduce type script
 6) overhaul css (don't use prebuilt)
 	-material UI -> custom css
