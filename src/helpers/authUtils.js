@@ -1,11 +1,6 @@
 import { handleResponse } from '.';
 
-export const authUtils = {
-  login,
-  logout
-};
-
-async function login(email, password) {
+export async function login(email, password) {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -46,16 +41,16 @@ async function login(email, password) {
 }
 
 // remove user from local storage to log user out
-export function logout() {
+export const logout = () => {
   localStorage.removeItem('user');
-}
+};
 
 // checks if their is a user item in local storage
-function isLoggedIn() {
+const isLoggedIn = () => {
   return localStorage.getItem('user');
-}
+};
 
 // store user details and jwt token in local storage to keep user logged in between page refreshes
-function setToken(user) {
+const setToken = user => {
   localStorage.setItem('user', JSON.stringify(user));
-}
+};

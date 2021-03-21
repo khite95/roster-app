@@ -1,8 +1,20 @@
 import React from 'react';
-import './Login.css';
+import './Component.css';
 
-export const Footer = () => (
-  <footer className="footer">
-    <p className="text-center">Kenny Hite &copy; 2018</p>
-  </footer>
-);
+type Props = {
+  author: string,
+  year: number
+};
+
+export const Footer: React.FC<Props> = ({
+  author = 'Kenny Hite',
+  year = 2021
+}) => {
+  return (
+    <footer className="footer">
+      <p className="text-center">
+        {author} &copy; {year}
+      </p>
+    </footer>
+  );
+};

@@ -1,24 +1,41 @@
 {
-  "parser": "babel-eslint",
-  "extends": ["prettier", "prettier/react"],
-  "plugins": ["react", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+      "airbnb",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:import/typescript",
+      "plugin:jest/recommended",
+      "plugin:react/recommended",
+      "plugin:prettier/recommended",
+      "prettier",
+      "prettier/@typescript-eslint",
+      "prettier/react"],
+  "plugins": [
+    "react", 
+    "prettier", 
+    "@typescript-eslint",
+    "import",
+    "jest"],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true,
-      "ecmaVersion": 6,
-      "impliedStrict": true
+      "ecmaVersion": 2020,
+      "impliedStrict": true,
+      "sourceType": "module"
     }
   },
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [0, { "extensions": [".js", ".jsx"] }],
     "jsx-a11y/href-no-hash": [0], 
-    "linebreak-style": 0
+    "linebreak-style": 0,
+    "prettier/prettier": 2 
   },
   "env": {
     "browser": true,
     "mocha": true,
     "jest": true,
-    "es6": true
+    "es6": true,
+    "node": true
   },
   "globals": {
     "Cypress": true,

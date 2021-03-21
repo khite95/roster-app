@@ -1,106 +1,83 @@
 import { playerConstants } from '../constants';
-import { playerService } from '../services';
-import { alertActions } from '.';
+import { getAllService, createService, delService } from '../services';
+import { success, error, clear } from '.';
 import { history } from '../helpers';
 
-export const playerActions = {
-  getAll,
-  create,
-  delete: del
+const playerCreateRequest = player => {
+  return { type: playerConstants.CREATE_REQUEST, player };
 };
 
-function playerCreateRequest(player) {
-  return { type: playerConstants.CREATE_REQUEST, player };
-}
-function playerCreateSuccess(player) {
+const playerCreateSuccess = player => {
   return { type: playerConstants.CREATE_SUCCESS, player };
-}
-function playerCreateFailure(error) {
+};
+
+const playerCreateFailure = error => {
   return { type: playerConstants.CREATE_FAILURE, error };
-}
+};
 
-function playerGetAllRequest() {
+const playerGetAllRequest = () => {
   return { type: playerConstants.GETALL_REQUEST };
-}
-function playerGetAllSuccess(players) {
+};
+
+const playerGetAllSuccess = players => {
   return { type: playerConstants.GETALL_SUCCESS, players };
-}
-function playerGetAllFailure(error) {
+};
+
+const playerGetAllFailure = error => {
   return { type: playerConstants.GETALL_FAILURE, error };
-}
+};
 
-function playerDeleteRequest(id) {
+const playerDeleteRequest = id => {
   return { type: playerConstants.DELETE_REQUEST, id };
-}
-function playerDeleteSuccess(id) {
-  return { type: playerConstants.DELETE_SUCCESS, id };
-}
-function playerDeleteFailure(id, error) {
-  return { type: playerConstants.DELETE_FAILURE, id, error };
-}
+};
 
-// make async call to api, handle promise, dispatch action when promise is resolved
-function getAll() {
+const playerDeleteSuccess = id => {
+  return { type: playerConstants.DELETE_SUCCESS, id };
+};
+
+const playerDeleteFailure = (id, error) => {
+  return { type: playerConstants.DELETE_FAILURE, id, error };
+};
+
+//Make async call to api, handle promise, dispatch action when promise is resolved
+export const getAll = () => {
   return async dispatch => {
     dispatch(playerGetAllRequest());
 
     try {
-      const players = await playerService.getAll();
+      const players = await getAllService();
       dispatch(playerGetAllSuccess(players));
     } catch (error) {
       dispatch(playerGetAllFailure(error.toString()));
     }
-    // .then(
-    //   players => dispatch(playerGetAllSuccess(players)),
-    //   error => dispatch(playerGetAllFailure(error.toString()))
-    // );
   };
-}
+};
 
-function del(id) {
+export const del = id => {
   return async dispatch => {
     dispatch(playerDeleteRequest(id));
     try {
-      const deletedPlayer = await playerService.delete(id);
+      const deletedPlayer = await delService(id);
       dispatch(playerDeleteSuccess(id));
-      dispatch(alertActions.success('Deleted Player'));
+      dispatch(success('Deleted Player'));
     } catch (error) {
       dispatch(playerDeleteFailure(id, error.toString()));
     }
-    // playerService.delete(id).then(
-    //   player => {
-    //     dispatch(playerDeleteSuccess(id));
-    //     dispatch(alertActions.success('Deleted Player'));
-    //   },
-    //   error => dispatch(playerDeleteFailure(id, error.toString()))
-    // );
   };
-}
+};
 
-function create(player) {
+export const create = player => {
   return async dispatch => {
     dispatch(playerCreateRequest(player));
 
     try {
-      const createdPlayer = await playerService.create(player);
+      const createdPlayer = await createService(player);
       dispatch(playerCreateSuccess());
       history.push('/roster');
-      dispatch(alertActions.success('Added New Player'));
+      dispatch(success('Added New Player'));
     } catch (error) {
       dispatch(playerCreateFailure(error.toString()));
-      dispatch(alertActions.error(error.toString()));
+      dispatch(error(error.toString()));
     }
-
-    // playerService.create(player).then(
-    //   player => {
-    //     dispatch(playerCreateSuccess());
-    //     history.push('/roster');
-    //     dispatch(alertActions.success('Added New Player'));
-    //   },
-    //   error => {
-    //     dispatch(playerCreateFailure(error.toString()));
-    //     dispatch(alertActions.error(error.toString()));
-    //   }
-    // );
   };
-}
+};

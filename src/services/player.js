@@ -1,17 +1,11 @@
 import { generateAuthHeader, handleResponse } from '../helpers';
 
-export const playerService = {
-  getAll,
-  create,
-  delete: del
-};
-
 var players = {
   players: []
 };
 
 //Replaced all functions with async functions to mock api calls
-async function getAll() {
+export const getAllService = async => {
   const requestOptions = {
     method: 'GET',
     headers: generateAuthHeader()
@@ -22,9 +16,9 @@ async function getAll() {
 
   return players;
   // return fetch(`get all api here`, requestOptions).then(handleResponse);
-}
+};
 
-async function del(id) {
+export const delService = async id => {
   const requestOptions = {
     method: 'DELETE',
     headers: generateAuthHeader()
@@ -33,9 +27,9 @@ async function del(id) {
   //createLocalPlayers(players);
   return players;
   // return fetch(`del api here`, requestOptions).then(handleResponse);
-}
+};
 
-async function create(player) {
+export const createService = player => {
   const headers = Object.assign(generateAuthHeader(), {
     'Content-Type': 'application/json'
   });
@@ -54,12 +48,12 @@ async function create(player) {
   //createLocalPlayers(players);
   return players;
   // return fetch(`create player api here`, requestOptions).then(handleResponse);
-}
+};
 
-function getLocalPlayers() {
+const getLocalPlayers = () => {
   return localStorage.getItem('players');
-}
+};
 
-function createLocalPlayers(players) {
+const createLocalPlayers = players => {
   localStorage.setItem('players', players);
-}
+};

@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { userActions, authActions } from '../actions';
-import './Login.css';
+import { create } from '../actions';
+import './Page.css';
+import { Header } from '../components';
 
-const RegisterPage = props => {
-  const [user, setUser] = useState({
-    user: {
+const PlayerPage = props => {
+  const [player, setPlayer] = useState({
+    player: {
       first_name: '',
       last_name: '',
-      email: '',
-      password: '',
-      confirm_password: ''
+      rating: '',
+      handedness: ''
     },
     submitted: false
   });
 
   const handleChange = e => {
     const { name, value } = e.target;
-    setUser(prevState => ({
+    setPlayer(prevState => ({
       ...prevState,
       [name]: value
     }));
@@ -26,49 +26,36 @@ const RegisterPage = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    setUser(prevState => ({
+    setPlayer(prevState => ({
       ...prevState,
       submitted: true
     }));
     const { dispatch } = props;
-    console.log(user);
+    console.log(player);
     if (
-      user.first_name &&
-      user.last_name &&
-      user.email &&
-      user.password &&
-      user.confirm_password
+      player.first_name &&
+      player.last_name &&
+      player.rating &&
+      player.handedness
     ) {
-      dispatch(userActions.create(user));
+      dispatch(create(player));
     }
   };
 
-  const { registering } = props;
+  const { addingPlayer } = props;
   return (
     <main>
+      <Header />
       <section className="section section-lined section-sm my-0">
-        <div className="container pt--md">
+        <br />
+        <div className="container pt--sm">
           <div className="row justify-content-center">
-            <div className="col-lg-5">
+            <div className="col-lg-13">
               <div className="card shadow border-0">
                 <div className="card-body bg-secondary px-lg-5 py-lg-5">
-                  <h2>Register</h2>
+                  <h3>Add Player to Roster</h3>
                   <form name="form" onSubmit={handleSubmit}>
                     <div className="form-group mb-3">
-                      <br />
-                      <label>Email</label>
-                      <div className="input-group input-group-alternative">
-                        <input
-                          type="email"
-                          className="form-control"
-                          name="email"
-                          placeholder="Email"
-                          id="email"
-                          value={user.email}
-                          onChange={handleChange}
-                          required
-                        />
-                      </div>
                       <br />
                       <label>First Name</label>
                       <div className="input-group input-group-alternative">
@@ -78,7 +65,7 @@ const RegisterPage = props => {
                           name="first_name"
                           placeholder="First Name"
                           id="firstName"
-                          value={user.first_name}
+                          value={player.first_name}
                           onChange={handleChange}
                           required
                         />
@@ -92,49 +79,57 @@ const RegisterPage = props => {
                           name="last_name"
                           placeholder="Last Name"
                           id="lastName"
-                          value={user.last_name}
+                          value={player.last_name}
                           onChange={handleChange}
                           required
                         />
                       </div>
                       <br />
-                      <label>Password</label>
+                      <label>Rating</label>
                       <div className="input-group input-group-alternative">
                         <input
-                          type="password"
+                          type="text"
                           className="form-control"
-                          name="password"
-                          placeholder="Password"
-                          id="password"
-                          value={user.password}
+                          name="rating"
+                          placeholder="Rating"
+                          id="rating"
+                          value={player.rating}
                           onChange={handleChange}
                           required
                         />
                       </div>
                       <br />
-                      <label>Confirm Password</label>
+                      <label>Handedness</label>
                       <div className="input-group input-group-alternative">
-                        <input
-                          type="password"
+                        <select
+                          type="select"
+                          name="handedness"
                           className="form-control"
-                          name="confirm_password"
-                          placeholder="Confirm Password"
-                          id="confirmPassword"
-                          value={user.confirm_password}
+                          size=""
+                          id="handedness"
+                          value={player.handedness}
                           onChange={handleChange}
                           required
-                        />
+                        >
+                          <option label="" id="empty"></option>
+                          <option defaultvalue label="Right" id="right">
+                            Right
+                          </option>
+                          <option label="Left" id="left">
+                            Left
+                          </option>
+                        </select>
                       </div>
                       <br />
                       <div className="text-center">
                         <div className="form-group">
-                          <button id="register" className="btn btn-primary">
-                            Register
+                          <button id="create" className="btn btn-primary">
+                            Add
                           </button>
-                          <Link to="/login" id="back" className="btn btn-link">
+                          <Link to="/roster" id="back" className="btn btn-link">
                             Back
                           </Link>
-                          {registering && (
+                          {addingPlayer && (
                             <img
                               alt=""
                               src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
@@ -154,12 +149,12 @@ const RegisterPage = props => {
   );
 };
 
-function mapStateToProps(state) {
-  const { registering } = state.registration;
+const mapStateToProps = state => {
+  const { addingPlayer } = state.players;
   return {
-    registering
+    addingPlayer
   };
-}
+};
 
-const connectedRegisterPage = connect(mapStateToProps)(RegisterPage);
-export { connectedRegisterPage as RegisterPage };
+const connectedPlayerPage = connect(mapStateToProps)(PlayerPage);
+export { connectedPlayerPage as PlayerPage };

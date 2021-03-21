@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Table } from 'reactstrap';
-import { playerActions } from '../actions';
-import { Header, Player } from '.';
-import './Login.css';
+import { del, getAll } from '../actions';
+import { Header, Player } from '../components';
+import './Page.css';
 
 const RosterPage = props => {
   useEffect(() => {
@@ -64,23 +64,23 @@ const RosterPage = props => {
   );
 };
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
   const { players } = state;
   return {
     players
   };
-}
+};
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = dispatch => {
   return {
     handleDeletePlayer: id => {
-      dispatch(playerActions.delete(id));
+      dispatch(del(id));
     },
     getAllPlayers: () => {
-      dispatch(playerActions.getAll());
+      dispatch(getAll());
     }
   };
-}
+};
 
 const connectedRosterPage = connect(
   mapStateToProps,

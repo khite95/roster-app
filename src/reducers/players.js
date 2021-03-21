@@ -1,6 +1,6 @@
 import { playerConstants } from '../constants';
 
-export function players(state = {}, action) {
+export const players = (state = {}, action) => {
   switch (action.type) {
     case playerConstants.GETALL_REQUEST:
       return {
@@ -31,6 +31,7 @@ export function players(state = {}, action) {
           )
         };
       }
+    // TODO: FIX
     // case playerConstants.DELETE_SUCCESS:
     //   // remove deleted player from state
     //   if (state.items.players === undefined) {
@@ -84,4 +85,4 @@ export function players(state = {}, action) {
     default:
       return state;
   }
-}
+};

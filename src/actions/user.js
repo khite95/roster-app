@@ -1,63 +1,43 @@
 import { userConstants } from '../constants';
-import { userService } from '../services';
-import { alertActions, authActions } from '.';
+import { createUserService } from '../services';
+import { success, error, loginAction } from '.';
 import { history } from '../helpers';
 
-export const userActions = {
-  create,
-  submitLogin
+const userCreateRequest = user => {
+  return { type: userConstants.CREATE_REQUEST, user };
 };
 
-function userCreateRequest(user) {
-  return { type: userConstants.CREATE_REQUEST, user };
-}
-function userCreateSuccess(user) {
+const userCreateSuccess = user => {
   return { type: userConstants.CREATE_SUCCESS, user };
-}
-function userCreateFailure(error) {
-  return { type: userConstants.CREATE_FAILURE, error };
-}
+};
 
-function create(user) {
+const userCreateFailure = error => {
+  return { type: userConstants.CREATE_FAILURE, error };
+};
+
+export const createUser = user => {
   return async dispatch => {
     dispatch(userCreateRequest(user));
 
     try {
-      const newUser = await userService.create(user);
+      const newUser = await createUserService(user);
       dispatch(userCreateSuccess(newUser));
       history.push('/roster');
-      dispatch(alertActions.success('Registration successful'));
+      dispatch(success('Registration successful'));
     } catch (error) {
       dispatch(userCreateFailure(error.toString()));
-      dispatch(alertActions.error(error.toString()));
+      dispatch(error(error.toString()));
     }
-
-    //   userService.create(user).then(
-    //     newUser => {
-    //       dispatch(userCreateSuccess(newUser));
-    //       history.push('/roster');
-    //       dispatch(alertActions.success('Registration successful'));
-    //     },
-    //     error => {
-    //       dispatch(userCreateFailure(error.toString()));
-    //       dispatch(alertActions.error(error.toString()));
-    //     }
-    //   );
-    // };
   };
-}
+};
 
-function submitLogin(user) {
+export const submitLogin = user => {
   return async dispatch => {
     try {
-      const submitUser = await create(user);
-      await dispatch(authActions.login(user.email, user.password));
+      const submitUser = await createUser(user);
+      await dispatch(loginAction(user.email, user.password));
     } catch (error) {
       console.log(error.toString());
     }
-
-    // userActions
-    //   .create(user)
-    //   .then(dispatch(authActions.login(user.email, user.password)));
   };
-}
+};

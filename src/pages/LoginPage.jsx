@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import './Login.css';
-import { authActions } from '../actions';
+import './Page.css';
+import { loginAction, logoutAction } from '../actions';
 
 const LoginPage = props => {
   const [email, setEmail] = useState('');
@@ -11,7 +11,7 @@ const LoginPage = props => {
 
   //Logout on reset
   useEffect(() => {
-    props.dispatch(authActions.logout());
+    props.dispatch(logoutAction());
   }, []);
 
   const handleSubmit = e => {
@@ -19,7 +19,7 @@ const LoginPage = props => {
     setSubmitted(true);
     const { dispatch } = props;
     if (email && password) {
-      dispatch(authActions.login(email, password));
+      dispatch(loginAction(email, password));
     }
   };
 
@@ -107,12 +107,12 @@ const LoginPage = props => {
   );
 };
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
   const { loggingIn } = state.authentication;
   return {
     loggingIn
   };
-}
+};
 
 const connectedLoginPage = connect(mapStateToProps)(LoginPage);
 export { connectedLoginPage as LoginPage };

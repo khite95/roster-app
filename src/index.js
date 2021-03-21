@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { App } from './app';
+import { App } from './App';
 import { store } from './helpers';
 // Importing the fetch polyfill allows cypress to intercept fetch api requests.
 import 'whatwg-fetch';

@@ -1,12 +1,12 @@
-import { authActions } from '../actions';
+import { logoutAction } from '../actions';
 
-export function handleResponse(response) {
+export const handleResponse = response => {
   return response.text().then(text => {
     const data = text && JSON.parse(text);
     if (!response.ok) {
       if (response.status === 401) {
         // auto logout if 401 response returned from api
-        authActions.logout();
+        logoutAction();
         window.location.reload(true);
       }
       var error = (data && data.message) || response.statusText;
@@ -17,4 +17,4 @@ export function handleResponse(response) {
     }
     return data;
   });
-}
+};

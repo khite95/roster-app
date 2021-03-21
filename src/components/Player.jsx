@@ -1,8 +1,8 @@
 import React from 'react';
 import { playerActions } from '../actions';
-import './Login.css';
+import './Component.css';
 
-export function Player({ playerProp, handleDeletePlayer, index }) {
+export const Player = ({ playerProp, handleDeletePlayer, index }) => {
   return (
     <tbody>
       <tr key={playerProp.first_name}>
@@ -18,4 +18,4 @@ export function Player({ playerProp, handleDeletePlayer, index }) {
       </tr>
     </tbody>
   );
-}
+};
