@@ -1,105 +1,61 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import './Component.css';
+import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import { useStyles } from '../styles';
 
 export const Header = props => {
-  const [toggle, setToggle] = useState(false);
-
-  const toggleState = () => {
-    setToggle(!toggle);
-  };
-
+  const classes = useStyles();
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary mt-4">
-      <div className="container">
-        <Link className="navbar-brand" to="/roster">
-          Player App
-        </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbar-primary"
-          aria-controls="navbar-primary"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+    <AppBar
+      position="static"
+      color="default"
+      elevation={0}
+      className={classes.appBar}
+    >
+      <Toolbar className={classes.toolbar}>
+        <Typography
+          variant="h6"
+          color="inherit"
+          noWrap
+          className={classes.toolbarTitle}
         >
-          <span className="navbar-toggler-icon" />
-        </button>
-        <div className="collapse navbar-collapse" id="navbar-primary">
-          <div className="navbar-collapse-header">
-            <div className="row">
-              <div className="col-6 collapse-brand">
-                <a href="index.html">
-                  <img src="assets/img/brand/blue.png" />
-                </a>
-              </div>
-              <div className="col-6 collapse-close">
-                <button
-                  type="button"
-                  className="navbar-toggler"
-                  data-toggle="collapse"
-                  data-target="#navbar-primary"
-                  aria-controls="navbar-primary"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-                >
-                  <span />
-                  <span />
-                </button>
-              </div>
-            </div>
-          </div>
-          <ul className="navbar-nav ml-lg-auto">
-            <li className="nav-item">
-              <Link className="nav-link" to="/roster">
-                Roster
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/player/new">
-                Add New Player
-              </Link>
-            </li>
-            <li className="nav-item">
-              <a
-                className="nav-link"
-                href="https://github.com/khite95/roster-app"
-              >
-                Github
-              </a>
-            </li>
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link"
-                href="#"
-                id="navbar-primary_dropdown_1"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Settings
-              </a>
-              <div
-                className="dropdown-menu dropdown-menu-right"
-                aria-labelledby="navbar-primary_dropdown_1"
-              >
-                <Link className="dropdown-item" to="/roster">
-                  Roster
-                </Link>
-                <Link className="dropdown-item" to="/player/new">
-                  Add New Player
-                </Link>
-                <div className="dropdown-divider" />
-                <Link className="dropdown-item" to="/login">
-                  Logout
-                </Link>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+          <Link className="navbar-brand" to="/roster">
+            Player App
+          </Link>
+        </Typography>
+        <nav>
+          <Link
+            variant="button"
+            color="textPrimary"
+            to="/roster"
+            className={classes.link}
+          >
+            Roster
+          </Link>
+          <Link
+            variant="button"
+            color="textPrimary"
+            to="/player/new"
+            className={classes.link}
+          >
+            Add New Player
+          </Link>
+          <Link
+            variant="button"
+            color="textPrimary"
+            to="https://github.com/khite95/roster-app"
+            className={classes.link}
+          >
+            Github
+          </Link>
+        </nav>
+        <Button color="primary" variant="outlined" className={classes.link}>
+          <Link to="/login">Logout</Link>
+        </Button>
+      </Toolbar>
+    </AppBar>
   );
 };

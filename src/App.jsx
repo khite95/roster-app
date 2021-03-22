@@ -26,8 +26,8 @@ const App = props => {
       <div className="text-center">
         {/* Alerts */}
         {/* {alert.message && (
-            <div className={`alert ${alert.type}`}>{alert.message}</div>
-          )} */}
+          <div className={`alert ${alert.type}`}>{alert.message}</div>
+        )} */}
         <BrowserRouter>
           <div>
             <Router history={history}>
@@ -66,9 +66,6 @@ const App = props => {
             </Router>
           </div>
         </BrowserRouter>
-        <div className="text-center">
-          <Footer />
-        </div>
       </div>
     </div>
   );

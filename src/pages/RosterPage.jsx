@@ -1,10 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Table } from 'reactstrap';
 import { del, getAll } from '../actions';
 import { Header, Player } from '../components';
-import './Page.css';
+import { useStyles } from '../styles';
+import Avatar from '@material-ui/core/Avatar';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import PeopleOutlineOutlinedIcon from '@material-ui/icons/PeopleOutlineOutlined';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
 const RosterPage = props => {
   useEffect(() => {
@@ -12,55 +21,54 @@ const RosterPage = props => {
   }, []);
 
   const { players } = props;
+  const classes = useStyles();
   return (
-    <main>
+    <React.Fragment>
       <Header />
-      <section className="section section-lined section-sm my-0">
-        <br />
-        <div className="container pt--lg">
-          <div className="row justify-content-center">
-            <div className="col-lg-13">
-              <div className="card shadow border-0">
-                <div className="card-body bg-secondary px-lg-5 py-lg-5">
-                  <h2>Player Roster</h2>
-                  <br />
-                  <div className="form-group mb-3">
-                    {players.items && (
-                      <Table hover>
-                        <thead>
-                          <tr key="Players">
-                            <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Rating</th>
-                            <th>Handedness</th>
-                            <th>Player id</th>
-                          </tr>
-                        </thead>
-                        {players.items.players &&
-                          players.items.players.map((player, index) => (
-                            <Player
-                              key={player.first_name}
-                              playerProp={player}
-                              handleDeletePlayer={() => {
-                                //this.props.handleDeletePlayer(player.id);
-                                //use index instead since we are mocking data from api
-                                props.handleDeletePlayer(index);
-                                props.getAllPlayers();
-                              }}
-                              index={index}
-                            />
-                          ))}
-                      </Table>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <Container component="main">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <PeopleOutlineOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Roster
+          </Typography>
+          <TableContainer component={Paper} style={{ width: '49%' }}>
+            <TableContainer className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>#</TableCell>
+                  <TableCell align="right">First Name</TableCell>
+                  <TableCell align="right">Last Name</TableCell>
+                  <TableCell align="right">Rating</TableCell>
+                  <TableCell align="right">Handedness</TableCell>
+                  <TableCell align="right">Player ID</TableCell>
+                </TableRow>
+              </TableHead>
+              {players.items && (
+                <TableBody>
+                  {players.items.players &&
+                    players.items.players.map((player, index) => (
+                      <Player
+                        key={player.first_name}
+                        playerProp={player}
+                        handleDeletePlayer={() => {
+                          //this.props.handleDeletePlayer(player.id);
+                          //use index instead since we are mocking data from api
+                          props.handleDeletePlayer(index);
+                          props.getAllPlayers();
+                        }}
+                        index={index}
+                      />
+                    ))}
+                </TableBody>
+              )}
+            </TableContainer>
+          </TableContainer>
         </div>
-      </section>
-    </main>
+      </Container>
+    </React.Fragment>
   );
 };
 

@@ -2,8 +2,22 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { create } from '../actions';
-import './Page.css';
 import { Header } from '../components';
+import { Copyright } from '../components';
+import { useStyles } from '../styles';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 const PlayerPage = props => {
   const [player, setPlayer] = useState({
@@ -42,110 +56,105 @@ const PlayerPage = props => {
     }
   };
 
+  const classes = useStyles();
   const { addingPlayer } = props;
   return (
-    <main>
+    <React.Fragment>
       <Header />
-      <section className="section section-lined section-sm my-0">
-        <br />
-        <div className="container pt--sm">
-          <div className="row justify-content-center">
-            <div className="col-lg-13">
-              <div className="card shadow border-0">
-                <div className="card-body bg-secondary px-lg-5 py-lg-5">
-                  <h3>Add Player to Roster</h3>
-                  <form name="form" onSubmit={handleSubmit}>
-                    <div className="form-group mb-3">
-                      <br />
-                      <label>First Name</label>
-                      <div className="input-group input-group-alternative">
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="first_name"
-                          placeholder="First Name"
-                          id="firstName"
-                          value={player.first_name}
-                          onChange={handleChange}
-                          required
-                        />
-                      </div>
-                      <br />
-                      <label>Last Name</label>
-                      <div className="input-group input-group-alternative">
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="last_name"
-                          placeholder="Last Name"
-                          id="lastName"
-                          value={player.last_name}
-                          onChange={handleChange}
-                          required
-                        />
-                      </div>
-                      <br />
-                      <label>Rating</label>
-                      <div className="input-group input-group-alternative">
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="rating"
-                          placeholder="Rating"
-                          id="rating"
-                          value={player.rating}
-                          onChange={handleChange}
-                          required
-                        />
-                      </div>
-                      <br />
-                      <label>Handedness</label>
-                      <div className="input-group input-group-alternative">
-                        <select
-                          type="select"
-                          name="handedness"
-                          className="form-control"
-                          size=""
-                          id="handedness"
-                          value={player.handedness}
-                          onChange={handleChange}
-                          required
-                        >
-                          <option label="" id="empty"></option>
-                          <option defaultvalue label="Right" id="right">
-                            Right
-                          </option>
-                          <option label="Left" id="left">
-                            Left
-                          </option>
-                        </select>
-                      </div>
-                      <br />
-                      <div className="text-center">
-                        <div className="form-group">
-                          <button id="create" className="btn btn-primary">
-                            Add
-                          </button>
-                          <Link to="/roster" id="back" className="btn btn-link">
-                            Back
-                          </Link>
-                          {addingPlayer && (
-                            <img
-                              alt=""
-                              src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
-                            />
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <AssignmentOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Add New Player
+          </Typography>
+          <form className={classes.form} noValidate onSubmit={handleSubmit}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="fname"
+                  name="first_name"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="firstName"
+                  label="First Name"
+                  autoFocus
+                  value={player.first_name}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="lastName"
+                  label="Last Name"
+                  name="last_name"
+                  autoComplete="lname"
+                  value={player.last_name}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="rating"
+                  label="Rating"
+                  name="rating"
+                  autoComplete="rating"
+                  value={player.rating}
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FormControl variant="outlined" className={classes.formControl}>
+                  <InputLabel id="handedness">Handedness</InputLabel>
+                  <Select
+                    labelId="handedness"
+                    id="handedness"
+                    value={player.handedness}
+                    onChange={handleChange}
+                    label="Handedness"
+                    name="handedness"
+                  >
+                    <MenuItem value="">
+                      <em></em>
+                    </MenuItem>
+                    <MenuItem value="Left">Left</MenuItem>
+                    <MenuItem value="Right">Right</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+            </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Add
+            </Button>
+            <Grid container justify="flex-end">
+              <Grid item>
+                <Link to="/roster" id="roster" variant="body2">
+                  Back
+                </Link>
+              </Grid>
+            </Grid>
+          </form>
         </div>
-      </section>
-    </main>
+        <Box mt={5}>
+          <Copyright />
+        </Box>
+      </Container>
+    </React.Fragment>
   );
 };
 
