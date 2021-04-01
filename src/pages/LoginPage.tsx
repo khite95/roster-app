@@ -16,7 +16,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
-const LoginPage = props => {
+const LoginPage = (props: { dispatch?: any; loggingIn?: any }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [submitted, setSubmitted] = useState(false);
@@ -26,7 +26,7 @@ const LoginPage = props => {
     props.dispatch(logoutAction());
   }, []);
 
-  const handleSubmit = e => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setSubmitted(true);
     const { dispatch } = props;
@@ -59,7 +59,7 @@ const LoginPage = props => {
             autoComplete="email"
             autoFocus
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -72,7 +72,7 @@ const LoginPage = props => {
             id="password"
             autoComplete="current-password"
             value={password}
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -89,12 +89,10 @@ const LoginPage = props => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link to="/" variant="body2">
-                Forgot password?
-              </Link>
+              <Link to="/">Forgot password?</Link>
             </Grid>
             <Grid item>
-              <Link to="/register" id="register" variant="body2">
+              <Link to="/register" id="register">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
@@ -108,7 +106,7 @@ const LoginPage = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: { authentication: { loggingIn: any } }) => {
   const { loggingIn } = state.authentication;
   return {
     loggingIn

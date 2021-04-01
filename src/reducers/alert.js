@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { alertConstants } from '../constants';
 
 export const alert = (state = {}, action) => {

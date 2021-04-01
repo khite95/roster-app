@@ -1,6 +1,6 @@
 import { handleResponse } from '../helpers';
 
-export const createUserService = async user => {
+export const createUserService = async (user: any) => {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -39,6 +39,6 @@ export const createUserService = async user => {
 };
 
 // store user details and jwt token in local storage to keep user logged in between page refreshes
-const setToken = user => {
+const setToken = (user: any) => {
   localStorage.setItem('user', JSON.stringify(user));
 };

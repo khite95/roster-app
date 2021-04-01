@@ -15,7 +15,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-const RosterPage = props => {
+const RosterPage = (props: any) => {
   useEffect(() => {
     props.getAllPlayers();
   }, []);
@@ -49,19 +49,24 @@ const RosterPage = props => {
               {players.items && (
                 <TableBody>
                   {players.items.players &&
-                    players.items.players.map((player, index) => (
-                      <Player
-                        key={player.first_name}
-                        playerProp={player}
-                        handleDeletePlayer={() => {
-                          //this.props.handleDeletePlayer(player.id);
-                          //use index instead since we are mocking data from api
-                          props.handleDeletePlayer(index);
-                          props.getAllPlayers();
-                        }}
-                        index={index}
-                      />
-                    ))}
+                    players.items.players.map(
+                      (
+                        player: { first_name: React.Key | null | undefined },
+                        index: any
+                      ) => (
+                        <Player
+                          key={player.first_name}
+                          playerProp={player}
+                          handleDeletePlayer={() => {
+                            //this.props.handleDeletePlayer(player.id);
+                            //use index instead since we are mocking data from api
+                            props.handleDeletePlayer(index);
+                            props.getAllPlayers();
+                          }}
+                          index={index}
+                        />
+                      )
+                    )}
                 </TableBody>
               )}
             </TableContainer>
@@ -72,16 +77,16 @@ const RosterPage = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: any) => {
   const { players } = state;
   return {
     players
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: any) => {
   return {
-    handleDeletePlayer: id => {
+    handleDeletePlayer: (id: any) => {
       dispatch(del(id));
     },
     getAllPlayers: () => {

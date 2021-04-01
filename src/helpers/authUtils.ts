@@ -1,6 +1,21 @@
 import { handleResponse } from '.';
 
-export async function login(email, password) {
+// remove user from local storage to log user out
+export const logout = () => {
+  localStorage.removeItem('user');
+};
+
+// checks if their is a user item in local storage
+const isLoggedIn = () => {
+  return localStorage.getItem('user');
+};
+
+// store user details and jwt token in local storage to keep user logged in between page refreshes
+const setToken = (user: any) => {
+  localStorage.setItem('user', JSON.stringify(user));
+};
+
+export const login = async (email: string, password: string) => {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -38,19 +53,4 @@ export async function login(email, password) {
   //       return user;
   //     })
   // );
-}
-
-// remove user from local storage to log user out
-export const logout = () => {
-  localStorage.removeItem('user');
-};
-
-// checks if their is a user item in local storage
-const isLoggedIn = () => {
-  return localStorage.getItem('user');
-};
-
-// store user details and jwt token in local storage to keep user logged in between page refreshes
-const setToken = user => {
-  localStorage.setItem('user', JSON.stringify(user));
 };

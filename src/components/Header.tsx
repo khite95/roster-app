@@ -6,7 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { useStyles } from '../styles';
 
-export const Header = props => {
+export const Header = (props: any) => {
   const classes = useStyles();
   return (
     <AppBar
@@ -27,25 +27,13 @@ export const Header = props => {
           </Link>
         </Typography>
         <nav>
-          <Link
-            variant="button"
-            color="textPrimary"
-            to="/roster"
-            className={classes.link}
-          >
+          <Link to="/roster" className={classes.link}>
             Roster
           </Link>
-          <Link
-            variant="button"
-            color="textPrimary"
-            to="/player/new"
-            className={classes.link}
-          >
+          <Link to="/player/new" className={classes.link}>
             Add New Player
           </Link>
           <Link
-            variant="button"
-            color="textPrimary"
             to="https://github.com/khite95/roster-app"
             className={classes.link}
           >

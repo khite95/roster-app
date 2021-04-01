@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createUser, submitLogin, authActions } from '../actions';
+import { createUser } from '../actions';
 import { Copyright } from '../components';
 import { useStyles } from '../styles';
 import Avatar from '@material-ui/core/Avatar';
@@ -16,8 +17,17 @@ import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
-const RegisterPage = props => {
-  const [user, setUser] = useState({
+interface IUserInfo {
+  user: any;
+  first_name?: any;
+  last_name?: any;
+  email?: any;
+  password?: any;
+  submitted: boolean;
+}
+
+const RegisterPage = (props: { dispatch?: any; registering?: any }) => {
+  const [user, setUser] = useState<IUserInfo>({
     user: {
       first_name: '',
       last_name: '',
@@ -27,17 +37,17 @@ const RegisterPage = props => {
     submitted: false
   });
 
-  const handleChange = e => {
+  const handleChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
-    setUser(prevState => ({
+    setUser((prevState) => ({
       ...prevState,
       [name]: value
     }));
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    setUser(prevState => ({
+    setUser((prevState) => ({
       ...prevState,
       submitted: true
     }));
@@ -134,7 +144,7 @@ const RegisterPage = props => {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link to="/login" id="login" variant="body2">
+              <Link to="/login" id="login">
                 Already have an account? Sign in
               </Link>
             </Grid>
@@ -148,7 +158,7 @@ const RegisterPage = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: { registration: { registering: any } }) => {
   const { registering } = state.registration;
   return {
     registering

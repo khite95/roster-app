@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -19,8 +20,17 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-const PlayerPage = props => {
-  const [player, setPlayer] = useState({
+interface IPlayer {
+  player: any;
+  first_name?: any;
+  last_name?: any;
+  rating?: any;
+  handedness?: any;
+  submitted: boolean;
+}
+
+const PlayerPage = (props: { dispatch?: any; addingPlayer?: any }) => {
+  const [players, setPlayer] = useState<IPlayer>({
     player: {
       first_name: '',
       last_name: '',
@@ -30,34 +40,37 @@ const PlayerPage = props => {
     submitted: false
   });
 
-  const handleChange = e => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
-    setPlayer(prevState => ({
+    console.log(value);
+    setPlayer((prevState) => ({
       ...prevState,
       [name]: value
     }));
+    console.log(players);
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    setPlayer(prevState => ({
+    setPlayer((prevState) => ({
       ...prevState,
       submitted: true
     }));
     const { dispatch } = props;
-    console.log(player);
+    console.log(players);
     if (
-      player.first_name &&
-      player.last_name &&
-      player.rating &&
-      player.handedness
+      players.first_name &&
+      players.last_name &&
+      players.rating &&
+      players.handedness
     ) {
-      dispatch(create(player));
+      dispatch(create(players));
     }
   };
 
   const classes = useStyles();
   const { addingPlayer } = props;
+  console.log(players);
   return (
     <React.Fragment>
       <Header />
@@ -82,7 +95,7 @@ const PlayerPage = props => {
                   id="firstName"
                   label="First Name"
                   autoFocus
-                  value={player.first_name}
+                  value={players.first_name}
                   onChange={handleChange}
                 />
               </Grid>
@@ -95,7 +108,7 @@ const PlayerPage = props => {
                   label="Last Name"
                   name="last_name"
                   autoComplete="lname"
-                  value={player.last_name}
+                  value={players.last_name}
                   onChange={handleChange}
                 />
               </Grid>
@@ -108,28 +121,22 @@ const PlayerPage = props => {
                   label="Rating"
                   name="rating"
                   autoComplete="rating"
-                  value={player.rating}
+                  value={players.rating}
                   onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
-                <FormControl variant="outlined" className={classes.formControl}>
-                  <InputLabel id="handedness">Handedness</InputLabel>
-                  <Select
-                    labelId="handedness"
-                    id="handedness"
-                    value={player.handedness}
-                    onChange={handleChange}
-                    label="Handedness"
-                    name="handedness"
-                  >
-                    <MenuItem value="">
-                      <em></em>
-                    </MenuItem>
-                    <MenuItem value="Left">Left</MenuItem>
-                    <MenuItem value="Right">Right</MenuItem>
-                  </Select>
-                </FormControl>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="handedness"
+                  label="Handedness"
+                  name="handedness"
+                  autoComplete="handedness"
+                  value={players.handedness}
+                  onChange={handleChange}
+                />
               </Grid>
             </Grid>
             <Button
@@ -143,7 +150,7 @@ const PlayerPage = props => {
             </Button>
             <Grid container justify="flex-end">
               <Grid item>
-                <Link to="/roster" id="roster" variant="body2">
+                <Link to="/roster" id="roster">
                   Back
                 </Link>
               </Grid>
@@ -158,7 +165,7 @@ const PlayerPage = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: { players: { addingPlayer: any } }) => {
   const { addingPlayer } = state.players;
   return {
     addingPlayer

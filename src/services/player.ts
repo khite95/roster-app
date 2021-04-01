@@ -1,11 +1,12 @@
+import { AnyARecord } from 'node:dns';
 import { generateAuthHeader, handleResponse } from '../helpers';
 
-var players = {
+const players: any = {
   players: []
 };
 
 //Replaced all functions with async functions to mock api calls
-export const getAllService = async => {
+export const getAllService = (async?: any) => {
   const requestOptions = {
     method: 'GET',
     headers: generateAuthHeader()
@@ -18,7 +19,7 @@ export const getAllService = async => {
   // return fetch(`get all api here`, requestOptions).then(handleResponse);
 };
 
-export const delService = async id => {
+export const delService = async (id: number) => {
   const requestOptions = {
     method: 'DELETE',
     headers: generateAuthHeader()
@@ -29,7 +30,7 @@ export const delService = async id => {
   // return fetch(`del api here`, requestOptions).then(handleResponse);
 };
 
-export const createService = player => {
+export const createService = (player: any) => {
   const headers = Object.assign(generateAuthHeader(), {
     'Content-Type': 'application/json'
   });
@@ -54,6 +55,6 @@ const getLocalPlayers = () => {
   return localStorage.getItem('players');
 };
 
-const createLocalPlayers = players => {
+const createLocalPlayers = (players: string) => {
   localStorage.setItem('players', players);
 };

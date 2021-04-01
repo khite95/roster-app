@@ -1,9 +1,13 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { authConstants } from '../constants';
 
-const user = JSON.parse(localStorage.getItem('user'));
+const user = JSON.parse(localStorage.getItem('user') || '{}');
 const initialState = user ? { loggedIn: true, user } : {};
 
-export const authentication = (state = initialState, action) => {
+export const authentication = (
+  state = initialState,
+  action: { type: never; user: never }
+) => {
   switch (action.type) {
     case authConstants.LOGIN_SUCCESS:
       return {
@@ -16,8 +20,6 @@ export const authentication = (state = initialState, action) => {
         user: action.user
       };
     case authConstants.LOGIN_FAILURE:
-      return {};
-    case authConstants.LOGOUT:
       return {};
     default:
       return state;

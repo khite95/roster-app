@@ -1,17 +1,17 @@
 import { playerConstants } from '../constants';
 import { getAllService, createService, delService } from '../services';
-import { success, error, clear } from '.';
 import { history } from '../helpers';
+import { success } from '.';
 
-const playerCreateRequest = player => {
+const playerCreateRequest = (player?: any) => {
   return { type: playerConstants.CREATE_REQUEST, player };
 };
 
-const playerCreateSuccess = player => {
+const playerCreateSuccess = (player?: any) => {
   return { type: playerConstants.CREATE_SUCCESS, player };
 };
 
-const playerCreateFailure = error => {
+const playerCreateFailure = (error?: any) => {
   return { type: playerConstants.CREATE_FAILURE, error };
 };
 
@@ -19,33 +19,36 @@ const playerGetAllRequest = () => {
   return { type: playerConstants.GETALL_REQUEST };
 };
 
-const playerGetAllSuccess = players => {
+const playerGetAllSuccess = (players?: any) => {
   return { type: playerConstants.GETALL_SUCCESS, players };
 };
 
-const playerGetAllFailure = error => {
+const playerGetAllFailure = (error?: any) => {
   return { type: playerConstants.GETALL_FAILURE, error };
 };
 
-const playerDeleteRequest = id => {
+const playerDeleteRequest = (id?: any) => {
   return { type: playerConstants.DELETE_REQUEST, id };
 };
 
-const playerDeleteSuccess = id => {
+const playerDeleteSuccess = (id?: any) => {
   return { type: playerConstants.DELETE_SUCCESS, id };
 };
 
-const playerDeleteFailure = (id, error) => {
+const playerDeleteFailure = (id?: any, error?: any) => {
   return { type: playerConstants.DELETE_FAILURE, id, error };
 };
 
 //Make async call to api, handle promise, dispatch action when promise is resolved
 export const getAll = () => {
-  return async dispatch => {
+  return async (
+    dispatch: (arg0: { type: any; players?: any; error?: any }) => void
+  ) => {
     dispatch(playerGetAllRequest());
 
     try {
       const players = await getAllService();
+      //const players = getAllService();
       dispatch(playerGetAllSuccess(players));
     } catch (error) {
       dispatch(playerGetAllFailure(error.toString()));
@@ -53,8 +56,15 @@ export const getAll = () => {
   };
 };
 
-export const del = id => {
-  return async dispatch => {
+export const del = (id: number) => {
+  return async (
+    dispatch: (arg0: {
+      type: any;
+      id?: any;
+      message?: string;
+      error?: any;
+    }) => void
+  ) => {
     dispatch(playerDeleteRequest(id));
     try {
       const deletedPlayer = await delService(id);
@@ -65,9 +75,16 @@ export const del = id => {
     }
   };
 };
-
-export const create = player => {
-  return async dispatch => {
+//Make async call to api, handle promise, dispatch action when promise is resolved
+export const create = (player: any) => {
+  return async (
+    dispatch: (arg0: {
+      type: any;
+      player?: any;
+      message?: string;
+      error?: any;
+    }) => void
+  ) => {
     dispatch(playerCreateRequest(player));
 
     try {

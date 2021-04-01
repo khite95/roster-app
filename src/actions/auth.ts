@@ -2,20 +2,26 @@ import { authConstants } from '../constants';
 import { error } from '.';
 import { history, login, logout } from '../helpers';
 
-const authRequest = user => {
+const authRequest = (user: { email: any }) => {
   return { type: authConstants.LOGIN_REQUEST, user };
 };
 
-const authSuccess = user => {
+const authSuccess = (user: {
+  success: boolean;
+  token: string;
+  user: { first_name: string; last_name: string; email: string; id: string };
+}) => {
   return { type: authConstants.LOGIN_SUCCESS, user };
 };
 
-const authFailure = error => {
+const authFailure = (error: any) => {
   return { type: authConstants.LOGIN_FAILURE, error };
 };
 
-export const loginAction = (email, password) => {
-  return async dispatch => {
+export const loginAction = (email: string, password: string) => {
+  return async (
+    dispatch: (arg0: { type: string; user?: any; error?: any }) => void
+  ) => {
     dispatch(authRequest({ email }));
 
     try {

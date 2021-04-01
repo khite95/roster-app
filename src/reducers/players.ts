@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { playerConstants } from '../constants';
 
-export const players = (state = {}, action) => {
+export const players = (state: any = {}, action: any) => {
   switch (action.type) {
     case playerConstants.GETALL_REQUEST:
       return {
@@ -19,14 +22,14 @@ export const players = (state = {}, action) => {
       if (state.items.players === undefined) {
         return {
           ...state,
-          items: state.items.map(player =>
+          items: state.items.map((player: { id: any }) =>
             player.id === action.id ? { ...player, deleting: true } : player
           )
         };
       } else {
         return {
           ...state,
-          items: state.items.players.map(player =>
+          items: state.items.players.map((player: { id: any }) =>
             player.id === action.id ? { ...player, deleting: true } : player
           )
         };
@@ -50,30 +53,34 @@ export const players = (state = {}, action) => {
       if (state.items.players === undefined) {
         return {
           ...state,
-          items: state.items.map(player => {
-            if (player.id === action.id) {
-              // make copy of player without 'deleting:true' property
-              const { deleting, ...playerCopy } = player;
-              // return copy of player with 'deleteError:[error]' property
-              return { ...playerCopy, deleteError: action.error };
-            }
+          items: state.items.map(
+            (player: { [x: string]: any; id?: any; deleting?: any }) => {
+              if (player.id === action.id) {
+                // make copy of player without 'deleting:true' property
+                const { deleting, ...playerCopy } = player;
+                // return copy of player with 'deleteError:[error]' property
+                return { ...playerCopy, deleteError: action.error };
+              }
 
-            return player;
-          })
+              return player;
+            }
+          )
         };
       } else {
         return {
           ...state,
-          items: state.map(player => {
-            if (player.id === action.id) {
-              // make copy of player without 'deleting:true' property
-              const { deleting, ...playerCopy } = player;
-              // return copy of player with 'deleteError:[error]' property
-              return { ...playerCopy, deleteError: action.error };
-            }
+          items: state.map(
+            (player: { [x: string]: any; id?: any; deleting?: any }) => {
+              if (player.id === action.id) {
+                // make copy of player without 'deleting:true' property
+                const { deleting, ...playerCopy } = player;
+                // return copy of player with 'deleteError:[error]' property
+                return { ...playerCopy, deleteError: action.error };
+              }
 
-            return player;
-          })
+              return player;
+            }
+          )
         };
       }
     case playerConstants.CREATE_REQUEST:

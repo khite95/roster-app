@@ -10,7 +10,6 @@ export const Copyright = () => {
         Kenny Hite
       </Link>{' '}
       {new Date().getFullYear()}
-      {'.'}
     </Typography>
   );
 };

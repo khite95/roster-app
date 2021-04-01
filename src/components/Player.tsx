@@ -5,7 +5,7 @@ import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined'
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
-export const Player = ({ playerProp, handleDeletePlayer, index }) => {
+export const Player = ({ playerProp, handleDeletePlayer, index }: any) => {
   const classes = useStyles();
   return (
     <TableRow key={playerProp.first_name}>
