@@ -6,7 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { useStyles } from '../styles';
 
-export const Header = (props: any) => {
+export const Header = () => {
   const classes = useStyles();
   return (
     <AppBar
@@ -22,26 +22,45 @@ export const Header = (props: any) => {
           noWrap
           className={classes.toolbarTitle}
         >
-          <Link className="navbar-brand" to="/roster">
+          <Button
+            color="primary"
+            variant="contained"
+            component={Link}
+            to="/roster"
+            className="navbar-brand"
+          >
             Player App
-          </Link>
+          </Button>
         </Typography>
         <nav>
-          <Link to="/roster" className={classes.link}>
-            Roster
-          </Link>
-          <Link to="/player/new" className={classes.link}>
-            Add New Player
-          </Link>
-          <Link
-            to="https://github.com/khite95/roster-app"
+          <Button
+            variant="contained"
+            component={Link}
+            to="/roster"
             className={classes.link}
           >
-            Github
-          </Link>
+            Roster
+          </Button>
+          <Button
+            variant="contained"
+            component={Link}
+            to="/player/new"
+            className={classes.link}
+          >
+            Add New Player
+          </Button>
+          <Button variant="text" className={classes.link}>
+            <Link to="https://github.com/khite95/roster-app">Github</Link>
+          </Button>
         </nav>
-        <Button color="primary" variant="outlined" className={classes.link}>
-          <Link to="/login">Logout</Link>
+        <Button
+          color="primary"
+          variant="outlined"
+          component={Link}
+          to="/login"
+          className={classes.link}
+        >
+          Logout
         </Button>
       </Toolbar>
     </AppBar>

@@ -1,8 +1,49 @@
 import { AnyARecord } from 'node:dns';
 import { generateAuthHeader, handleResponse } from '../helpers';
 
-const players: any = {
-  players: []
+const playerList: any = {
+  players: [
+    {
+      submitted: false,
+      first_name: 'John',
+      last_name: 'Smith',
+      rating: '10',
+      handedness: 'Right',
+      id: 0
+    },
+    {
+      submitted: false,
+      first_name: 'Rob',
+      last_name: 'Stark',
+      rating: '1',
+      handedness: 'Left',
+      id: 1
+    },
+    {
+      submitted: false,
+      first_name: 'Ken',
+      last_name: 'H',
+      rating: '10',
+      handedness: 'Right',
+      id: 2
+    },
+    {
+      submitted: false,
+      first_name: 'Bob',
+      last_name: 'Barker',
+      rating: '2',
+      handedness: 'Left',
+      id: 3
+    },
+    {
+      submitted: false,
+      first_name: 'Carl',
+      last_name: 'Sanya',
+      rating: '3',
+      handedness: 'Right',
+      id: 4
+    }
+  ]
 };
 
 //Replaced all functions with async functions to mock api calls
@@ -15,7 +56,7 @@ export const getAllService = (async?: any) => {
   //   players = [...getLocalPlayers()];
   // }
 
-  return players;
+  return playerList;
   // return fetch(`get all api here`, requestOptions).then(handleResponse);
 };
 
@@ -24,9 +65,9 @@ export const delService = async (id: number) => {
     method: 'DELETE',
     headers: generateAuthHeader()
   };
-  players.players.splice(id, 1);
+  playerList.players.splice(id, 1);
   //createLocalPlayers(players);
-  return players;
+  return playerList;
   // return fetch(`del api here`, requestOptions).then(handleResponse);
 };
 
@@ -40,14 +81,14 @@ export const createService = (player: any) => {
     headers: headers,
     body: JSON.stringify(player)
   };
-  if (players.players !== undefined) {
-    player.id = players.players.length;
+  if (playerList.players !== undefined) {
+    player.id = playerList.players.length;
   } else {
     player.id = 0;
   }
-  players.players.push(player);
+  playerList.players.push(player);
   //createLocalPlayers(players);
-  return players;
+  return playerList;
   // return fetch(`create player api here`, requestOptions).then(handleResponse);
 };
 
@@ -55,6 +96,6 @@ const getLocalPlayers = () => {
   return localStorage.getItem('players');
 };
 
-const createLocalPlayers = (players: string) => {
-  localStorage.setItem('players', players);
+const createLocalPlayers = (playersList: string) => {
+  localStorage.setItem('players', playersList);
 };

@@ -1,35 +1,32 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react';
-import { Fade } from 'reactstrap';
-import {
-  BrowserRouter,
-  Switch,
-  Router,
-  Route,
-  withRouter
-} from 'react-router-dom';
+import { BrowserRouter, Router, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { history } from './helpers';
 import { clear } from './actions';
 import { PrivateRoute } from './components';
 import { RosterPage, PlayerPage, LoginPage, RegisterPage } from './pages';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
-const App = (props: { dispatch: any }) => {
+const SnackBarAlert = (props: any) => {
+  return <MuiAlert elevation={6} variant="standard" {...props} />;
+};
+
+const App = (props: { dispatch: any; alert: any }) => {
+  const [open, setOpen] = useState(false);
   const { dispatch } = props;
+  const { alert } = props;
   // history.listen(() => {
   //   // clear alert on location change
   //   dispatch(clear());
   // });
 
-  // const { alert } = props;
+  console.log(alert.message);
   return (
     <div className="container">
       <div className="text-center">
-        {/* Alerts */}
-        {/* {alert.message && (
-          <div className={`alert ${alert.type}`}>{alert.message}</div>
-        )} */}
         <BrowserRouter>
           <div>
             <Router history={history}>
@@ -43,6 +40,13 @@ const App = (props: { dispatch: any }) => {
             </Router>
           </div>
         </BrowserRouter>
+        {alert.message && (
+          <React.Fragment>
+            <Snackbar open={open} autoHideDuration={1000}>
+              <SnackBarAlert severity="success">{alert.message}</SnackBarAlert>
+            </Snackbar>
+          </React.Fragment>
+        )}
       </div>
     </div>
   );

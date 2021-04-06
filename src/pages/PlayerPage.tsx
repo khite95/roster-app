@@ -15,28 +15,22 @@ import Box from '@material-ui/core/Box';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 
-interface IPlayer {
-  player: any;
-  first_name?: any;
-  last_name?: any;
-  rating?: any;
-  handedness?: any;
+interface PlayerState {
+  first_name: string;
+  last_name: string;
+  rating: number | string;
+  handedness: string;
   submitted: boolean;
+  id?: number;
 }
 
 const PlayerPage = (props: { dispatch?: any; addingPlayer?: any }) => {
-  const [players, setPlayer] = useState<IPlayer>({
-    player: {
-      first_name: '',
-      last_name: '',
-      rating: '',
-      handedness: ''
-    },
+  const [players, setPlayer] = useState<PlayerState>({
+    first_name: '',
+    last_name: '',
+    rating: '',
+    handedness: '',
     submitted: false
   });
 
@@ -47,7 +41,6 @@ const PlayerPage = (props: { dispatch?: any; addingPlayer?: any }) => {
       ...prevState,
       [name]: value
     }));
-    console.log(players);
   };
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
@@ -57,7 +50,6 @@ const PlayerPage = (props: { dispatch?: any; addingPlayer?: any }) => {
       submitted: true
     }));
     const { dispatch } = props;
-    console.log(players);
     if (
       players.first_name &&
       players.last_name &&
@@ -70,7 +62,6 @@ const PlayerPage = (props: { dispatch?: any; addingPlayer?: any }) => {
 
   const classes = useStyles();
   const { addingPlayer } = props;
-  console.log(players);
   return (
     <React.Fragment>
       <Header />

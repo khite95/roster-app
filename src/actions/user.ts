@@ -67,9 +67,9 @@ export const submitLogin = (user: any) => {
     ) => any
   ) => {
     try {
-      //const submitUser = await createUser(user);
-      const submitUser = createUser(user);
-      await dispatch(loginAction(user.email, user.password));
+      const submitUser = await createUser(user);
+      //const submitUser = createUser(user);
+      dispatch(loginAction(user.email, user.password));
     } catch (error) {
       console.log(error.toString());
     }

@@ -31,10 +31,14 @@ const RosterPage = (props: any) => {
           <Avatar className={classes.avatar}>
             <PeopleOutlineOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h4">
             Roster
           </Typography>
-          <TableContainer component={Paper} style={{ width: '49%' }}>
+          <TableContainer
+            component={Paper}
+            elevation={3}
+            style={{ width: '49%' }}
+          >
             <TableContainer className={classes.table} aria-label="simple table">
               <TableHead>
                 <TableRow>
@@ -46,28 +50,34 @@ const RosterPage = (props: any) => {
                   <TableCell align="right">Player ID</TableCell>
                 </TableRow>
               </TableHead>
-              {players.items && (
-                <TableBody>
-                  {players.items.players &&
-                    players.items.players.map(
+              {players.players && (
+                <React.Fragment>
+                  <TableBody>
+                    {players.players.map(
                       (
-                        player: { first_name: React.Key | null | undefined },
-                        index: any
+                        player: {
+                          first_name: string;
+                          last_name: string;
+                          rating: number;
+                          handedness: string;
+                          id: number;
+                        },
+                        index: number
                       ) => (
                         <Player
-                          key={player.first_name}
+                          key={player.last_name}
                           playerProp={player}
                           handleDeletePlayer={() => {
-                            //this.props.handleDeletePlayer(player.id);
-                            //use index instead since we are mocking data from api
-                            props.handleDeletePlayer(index);
-                            props.getAllPlayers();
+                            // this.props.handleDeletePlayer(player.id);
+                            // Using the last name as a key to delete from table
+                            props.handleDeletePlayer(player.last_name);
                           }}
                           index={index}
                         />
                       )
                     )}
-                </TableBody>
+                  </TableBody>
+                </React.Fragment>
               )}
             </TableContainer>
           </TableContainer>

@@ -45,7 +45,6 @@ export const getAll = () => {
     dispatch: (arg0: { type: any; players?: any; error?: any }) => void
   ) => {
     dispatch(playerGetAllRequest());
-
     try {
       const players = await getAllService();
       //const players = getAllService();

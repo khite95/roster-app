@@ -11,7 +11,7 @@ export const players = (state: any = {}, action: any) => {
       };
     case playerConstants.GETALL_SUCCESS:
       return {
-        items: action.players
+        ...action.players
       };
     case playerConstants.GETALL_FAILURE:
       return {
@@ -19,70 +19,41 @@ export const players = (state: any = {}, action: any) => {
       };
     case playerConstants.DELETE_REQUEST:
       // add 'deleting:true' property to players being deleted
-      if (state.items.players === undefined) {
-        return {
-          ...state,
-          items: state.items.map((player: { id: any }) =>
-            player.id === action.id ? { ...player, deleting: true } : player
-          )
-        };
-      } else {
-        return {
-          ...state,
-          items: state.items.players.map((player: { id: any }) =>
-            player.id === action.id ? { ...player, deleting: true } : player
-          )
-        };
-      }
-    // TODO: FIX
-    // case playerConstants.DELETE_SUCCESS:
-    //   // remove deleted player from state
-    //   if (state.items.players === undefined) {
-    //     return {
-    //       ...state,
-    //       items: state.items.filter(player => player.id !== action.id)
-    //     };
-    //   } else {
-    //     return {
-    //       ...state,
-    //       items: state.filter(player => player.id !== action.id)
-    //     };
-    //   }
+      // Using the last name as a key to delete from table
+      return {
+        ...state,
+        players: state.players.map((player: { last_name: any }) =>
+          player.last_name === action.id
+            ? { ...player, deleting: true }
+            : player
+        )
+      };
+    case playerConstants.DELETE_SUCCESS:
+      return {
+        ...state,
+        players: state.players.filter(
+          (player: { last_name: any }) => player.last_name !== action.id
+        )
+      };
+
     case playerConstants.DELETE_FAILURE:
       // remove 'deleting:true' property and add 'deleteError:[error]' property to player
-      if (state.items.players === undefined) {
-        return {
-          ...state,
-          items: state.items.map(
-            (player: { [x: string]: any; id?: any; deleting?: any }) => {
-              if (player.id === action.id) {
-                // make copy of player without 'deleting:true' property
-                const { deleting, ...playerCopy } = player;
-                // return copy of player with 'deleteError:[error]' property
-                return { ...playerCopy, deleteError: action.error };
-              }
-
-              return player;
+      return {
+        ...state,
+        players: state.players.map(
+          (player: { [x: string]: any; id?: any; deleting?: any }) => {
+            if (player.id === action.id) {
+              // make copy of player without 'deleting:true' property
+              const { deleting, ...playerCopy } = player;
+              // return copy of player with 'deleteError:[error]' property
+              return { ...playerCopy, deleteError: action.error };
             }
-          )
-        };
-      } else {
-        return {
-          ...state,
-          items: state.map(
-            (player: { [x: string]: any; id?: any; deleting?: any }) => {
-              if (player.id === action.id) {
-                // make copy of player without 'deleting:true' property
-                const { deleting, ...playerCopy } = player;
-                // return copy of player with 'deleteError:[error]' property
-                return { ...playerCopy, deleteError: action.error };
-              }
 
-              return player;
-            }
-          )
-        };
-      }
+            return player;
+          }
+        )
+      };
+
     case playerConstants.CREATE_REQUEST:
       return { addingPlayer: true };
     case playerConstants.CREATE_SUCCESS:

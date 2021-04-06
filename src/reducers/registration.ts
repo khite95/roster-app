@@ -3,7 +3,7 @@
 import { userConstants } from '../constants';
 
 const user = JSON.parse(localStorage.getItem('user') || '{}');
-const initialState = user ? { loggedIn: true, user } : {};
+const initialState = user ? { loggedIn: false, user } : {};
 
 export const registration = (
   state = initialState,
@@ -12,7 +12,7 @@ export const registration = (
   switch (action.type) {
     case userConstants.CREATE_REQUEST:
       return {
-        loggedIn: true,
+        loggedIn: false,
         user: action.user
       };
     case userConstants.CREATE_SUCCESS:
