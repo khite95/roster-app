@@ -1,7 +1,7 @@
 import { handleResponse } from '.';
 
 // remove user from local storage to log user out
-export const logout = () => {
+export const logout = (): void => {
   localStorage.removeItem('user');
 };
 

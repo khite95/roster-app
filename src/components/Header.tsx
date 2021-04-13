@@ -6,7 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { useStyles } from '../styles';
 
-export const Header = () => {
+export const Header = (): JSX.Element => {
   const classes = useStyles();
   return (
     <AppBar

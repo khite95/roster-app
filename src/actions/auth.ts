@@ -1,8 +1,7 @@
 import { authConstants } from '../constants';
-import { error } from '.';
 import { history, login, logout } from '../helpers';
 
-const authRequest = (user: { email: any }) => {
+const authRequest = (user: { email: string }) => {
   return { type: authConstants.LOGIN_REQUEST, user };
 };
 
@@ -14,7 +13,7 @@ const authSuccess = (user: {
   return { type: authConstants.LOGIN_SUCCESS, user };
 };
 
-const authFailure = (error: any) => {
+const authFailure = (error: string) => {
   return { type: authConstants.LOGIN_FAILURE, error };
 };
 

@@ -15,7 +15,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-const RosterPage = (props: any) => {
+const RosterPage = (props: {
+  getAllPlayers?: any;
+  handleDeletePlayer?: any;
+  players?: any;
+}) => {
   useEffect(() => {
     props.getAllPlayers();
   }, []);
@@ -87,7 +91,7 @@ const RosterPage = (props: any) => {
   );
 };
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: { players: any }) => {
   const { players } = state;
   return {
     players
@@ -96,7 +100,7 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    handleDeletePlayer: (id: any) => {
+    handleDeletePlayer: (id: number) => {
       dispatch(del(id));
     },
     getAllPlayers: () => {

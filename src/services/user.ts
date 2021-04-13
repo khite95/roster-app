@@ -1,6 +1,14 @@
 import { handleResponse } from '../helpers';
 
-export const createUserService = async (user: any) => {
+export const createUserService = async (user: {
+  user: {
+    first_name: string;
+    last_name: string;
+    email: string;
+    password: string;
+  };
+  submitted: boolean;
+}) => {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

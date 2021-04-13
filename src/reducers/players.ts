@@ -3,7 +3,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { playerConstants } from '../constants';
 
-export const players = (state: any = {}, action: any) => {
+export const players = (
+  state: any = {},
+  action: { type: any; players: any; error: any; id: any }
+) => {
   switch (action.type) {
     case playerConstants.GETALL_REQUEST:
       return {

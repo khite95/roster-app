@@ -4,7 +4,7 @@ export const success = (message: string) => {
   return { type: alertConstants.SUCCESS, message };
 };
 
-export const error = (message: any) => {
+export const error = (message: string) => {
   return { type: alertConstants.ERROR, message };
 };
 

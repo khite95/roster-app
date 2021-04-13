@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { alertConstants } from '../constants';
 
-export const alert = (state = {}, action) => {
+export const alert = (state = {}, action: { type: any; message: any }) => {
   switch (action.type) {
     case alertConstants.SUCCESS:
       return {

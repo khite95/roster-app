@@ -3,7 +3,7 @@ import { getAllService, createService, delService } from '../services';
 import { history } from '../helpers';
 import { success } from '.';
 
-const playerCreateRequest = (player?: any) => {
+const playerCreateRequest = (player: any) => {
   return { type: playerConstants.CREATE_REQUEST, player };
 };
 
@@ -11,7 +11,7 @@ const playerCreateSuccess = (player?: any) => {
   return { type: playerConstants.CREATE_SUCCESS, player };
 };
 
-const playerCreateFailure = (error?: any) => {
+const playerCreateFailure = (error: any) => {
   return { type: playerConstants.CREATE_FAILURE, error };
 };
 
@@ -19,23 +19,23 @@ const playerGetAllRequest = () => {
   return { type: playerConstants.GETALL_REQUEST };
 };
 
-const playerGetAllSuccess = (players?: any) => {
+const playerGetAllSuccess = (players: any) => {
   return { type: playerConstants.GETALL_SUCCESS, players };
 };
 
-const playerGetAllFailure = (error?: any) => {
+const playerGetAllFailure = (error: any) => {
   return { type: playerConstants.GETALL_FAILURE, error };
 };
 
-const playerDeleteRequest = (id?: any) => {
+const playerDeleteRequest = (id: number) => {
   return { type: playerConstants.DELETE_REQUEST, id };
 };
 
-const playerDeleteSuccess = (id?: any) => {
+const playerDeleteSuccess = (id: number) => {
   return { type: playerConstants.DELETE_SUCCESS, id };
 };
 
-const playerDeleteFailure = (id?: any, error?: any) => {
+const playerDeleteFailure = (id: number, error: any) => {
   return { type: playerConstants.DELETE_FAILURE, id, error };
 };
 
@@ -74,6 +74,7 @@ export const del = (id: number) => {
     }
   };
 };
+
 //Make async call to api, handle promise, dispatch action when promise is resolved
 export const create = (player: any) => {
   return async (
@@ -93,7 +94,6 @@ export const create = (player: any) => {
       dispatch(success('Added New Player'));
     } catch (error) {
       dispatch(playerCreateFailure(error.toString()));
-      dispatch(error(error.toString()));
     }
   };
 };

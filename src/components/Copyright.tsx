@@ -2,7 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 
-export const Copyright = () => {
+export const Copyright = (): JSX.Element => {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}

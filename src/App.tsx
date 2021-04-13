@@ -8,13 +8,13 @@ import { clear } from './actions';
 import { PrivateRoute } from './components';
 import { RosterPage, PlayerPage, LoginPage, RegisterPage } from './pages';
 import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 
-const SnackBarAlert = (props: any) => {
+const SnackBarAlert = (props: JSX.IntrinsicAttributes & AlertProps) => {
   return <MuiAlert elevation={6} variant="standard" {...props} />;
 };
 
-const App = (props: { dispatch: any; alert: any }) => {
+const App = (props: { dispatch?: any; alert?: any }) => {
   const [open, setOpen] = useState(false);
   const { dispatch } = props;
   const { alert } = props;
@@ -23,7 +23,6 @@ const App = (props: { dispatch: any; alert: any }) => {
   //   dispatch(clear());
   // });
 
-  console.log(alert.message);
   return (
     <div className="container">
       <div className="text-center">

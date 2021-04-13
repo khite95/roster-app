@@ -17,7 +17,7 @@ import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
-interface IUserInfo {
+interface UserInfo {
   user: any;
   first_name?: any;
   last_name?: any;
@@ -27,7 +27,7 @@ interface IUserInfo {
 }
 
 const RegisterPage = (props: { dispatch?: any; registering?: any }) => {
-  const [user, setUser] = useState<IUserInfo>({
+  const [user, setUser] = useState<UserInfo>({
     user: {
       first_name: '',
       last_name: '',

@@ -36,7 +36,6 @@ const PlayerPage = (props: { dispatch?: any; addingPlayer?: any }) => {
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
-    console.log(value);
     setPlayer((prevState) => ({
       ...prevState,
       [name]: value
