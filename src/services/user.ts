@@ -1,20 +1,24 @@
-import { handleResponse } from '../helpers';
+interface IUserSubmission {
+  user: IUser;
+  token: string;
+  success: boolean;
+}
 
-export const createUserService = async (user: {
-  user: {
-    first_name: string;
-    last_name: string;
-    email: string;
-    password: string;
-  };
-  submitted: boolean;
-}) => {
-  const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(user)
-  };
+interface IUser {
+  first_name: string;
+  last_name: string;
+  email: string;
+  id: string;
+  password?: string;
+  submitted?: boolean | string;
+}
 
+// store user details and jwt token in local storage to keep user logged in between page refreshes
+const setToken = (user: IUser) => {
+  localStorage.setItem('user', JSON.stringify(user));
+};
+
+export const createUserService = (user: IUser): IUserSubmission => {
   const createdUser = {
     success: true,
     token:
@@ -31,22 +35,4 @@ export const createUserService = async (user: {
     setToken(user);
   }
   return createdUser;
-
-  // return fetch(
-  //   `create user api here`,
-  //   requestOptions
-  // )
-  // .then(handleResponse)
-  // Promise.resolve(createdUser).then(user => {
-  //   // login successful if there's a jwt token in the response
-  //   if (user.token) {
-  //     setToken(user);
-  //   }
-  //   return user;
-  // });
-};
-
-// store user details and jwt token in local storage to keep user logged in between page refreshes
-const setToken = (user: any) => {
-  localStorage.setItem('user', JSON.stringify(user));
 };
