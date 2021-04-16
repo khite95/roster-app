@@ -64,7 +64,10 @@ const RegisterPage = (props: { dispatch?: any; registering?: any }) => {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
+        <Avatar
+          className={classes.avatar}
+          style={{ backgroundColor: '#3f51b5' }}
+        >
           <AssignmentOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">

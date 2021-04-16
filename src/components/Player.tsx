@@ -34,11 +34,11 @@ export const Player = ({
         <TableCell component="th" scope="row">
           {index}
         </TableCell>
-        <TableCell align="right">{playerProp.first_name}</TableCell>
-        <TableCell align="right">{playerProp.last_name}</TableCell>
-        <TableCell align="right">{playerProp.rating}</TableCell>
-        <TableCell align="right">{playerProp.handedness}</TableCell>
-        <TableCell align="right">{playerProp.id}</TableCell>
+        <TableCell align="center">{playerProp.first_name}</TableCell>
+        <TableCell align="center">{playerProp.last_name}</TableCell>
+        <TableCell align="center">{playerProp.rating}</TableCell>
+        <TableCell align="center">{playerProp.handedness}</TableCell>
+        <TableCell align="center">{playerProp.id}</TableCell>
         <TableCell
           align="right"
           id="delete"

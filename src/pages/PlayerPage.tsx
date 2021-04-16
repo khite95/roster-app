@@ -67,7 +67,10 @@ const PlayerPage = (props: { dispatch?: any; addingPlayer?: any }) => {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
+          <Avatar
+            className={classes.avatar}
+            style={{ backgroundColor: '#3f51b5' }}
+          >
             <PersonAddIcon />
           </Avatar>
           <Typography component="h1" variant="h5">

@@ -32,7 +32,10 @@ const RosterPage = (props: {
       <Container component="main">
         <CssBaseline />
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
+          <Avatar
+            className={classes.avatar}
+            style={{ backgroundColor: '#3f51b5' }}
+          >
             <PeopleOutlineOutlinedIcon />
           </Avatar>
           <Typography
@@ -46,7 +49,10 @@ const RosterPage = (props: {
           <TableContainer
             component={Paper}
             elevation={1}
-            style={{ width: '50%', background: '#fafafa' }}
+            style={{
+              width: '50%',
+              backgroundColor: '#fafafa'
+            }}
             className={classes.table}
             aria-label="simple table"
           >
