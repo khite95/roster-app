@@ -35,55 +35,60 @@ const RosterPage = (props: {
           <Avatar className={classes.avatar}>
             <PeopleOutlineOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h4">
+          <Typography
+            className={classes.typography}
+            component="h1"
+            variant="h4"
+          >
             Roster
           </Typography>
+
           <TableContainer
             component={Paper}
-            elevation={3}
-            style={{ width: '49%' }}
+            elevation={1}
+            style={{ width: '50%', background: '#fafafa' }}
+            className={classes.table}
+            aria-label="simple table"
           >
-            <TableContainer className={classes.table} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>#</TableCell>
-                  <TableCell align="right">First Name</TableCell>
-                  <TableCell align="right">Last Name</TableCell>
-                  <TableCell align="right">Rating</TableCell>
-                  <TableCell align="right">Handedness</TableCell>
-                  <TableCell align="right">Player ID</TableCell>
-                </TableRow>
-              </TableHead>
-              {players.players && (
-                <React.Fragment>
-                  <TableBody>
-                    {players.players.map(
-                      (
-                        player: {
-                          first_name: string;
-                          last_name: string;
-                          rating: number;
-                          handedness: string;
-                          id: number;
-                        },
-                        index: number
-                      ) => (
-                        <Player
-                          key={player.last_name}
-                          playerProp={player}
-                          handleDeletePlayer={() => {
-                            // this.props.handleDeletePlayer(player.id);
-                            // Using the last name as a key to delete from table
-                            props.handleDeletePlayer(player.last_name);
-                          }}
-                          index={index}
-                        />
-                      )
-                    )}
-                  </TableBody>
-                </React.Fragment>
-              )}
-            </TableContainer>
+            <TableHead>
+              <TableRow>
+                <TableCell>#</TableCell>
+                <TableCell align="right">First Name</TableCell>
+                <TableCell align="right">Last Name</TableCell>
+                <TableCell align="right">Rating</TableCell>
+                <TableCell align="right">Handedness</TableCell>
+                <TableCell align="right">Player ID</TableCell>
+              </TableRow>
+            </TableHead>
+            {players.players && (
+              <React.Fragment>
+                <TableBody>
+                  {players.players.map(
+                    (
+                      player: {
+                        first_name: string;
+                        last_name: string;
+                        rating: number;
+                        handedness: string;
+                        id: number;
+                      },
+                      index: number
+                    ) => (
+                      <Player
+                        key={player.last_name}
+                        playerProp={player}
+                        handleDeletePlayer={() => {
+                          // this.props.handleDeletePlayer(player.id);
+                          // Using the last name as a key to delete from table
+                          props.handleDeletePlayer(player.last_name);
+                        }}
+                        index={index}
+                      />
+                    )
+                  )}
+                </TableBody>
+              </React.Fragment>
+            )}
           </TableContainer>
         </div>
       </Container>

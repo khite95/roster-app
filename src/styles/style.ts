@@ -6,10 +6,11 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.main
   },
   paper: {
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(5),
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#fafafa'
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -19,8 +20,10 @@ export const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2)
   },
   table: {
-    minWidth: 550,
-    overflowX: 'hidden'
+    minWidth: 506,
+    width: '50%',
+    overflowX: 'hidden',
+    backgroundColor: '#fafafa'
   },
   appBar: {
     borderBottom: `1px solid ${theme.palette.divider}`
@@ -43,6 +46,6 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(4)
   },
   typography: {
-    margin: theme.spacing(4)
+    marginBottom: theme.spacing(2)
   }
 }));
