@@ -10,9 +10,9 @@ import { RosterPage, PlayerPage, LoginPage, RegisterPage } from './pages';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 
-const SnackBarAlert = (props: JSX.IntrinsicAttributes & AlertProps) => {
-  return <MuiAlert elevation={6} variant="standard" {...props} />;
-};
+// const SnackBarAlert = (props: JSX.IntrinsicAttributes & AlertProps) => {
+//   return <MuiAlert elevation={6} variant="standard" {...props} />;
+// };
 
 const App = (props: { dispatch?: any; alert?: any }) => {
   const [open, setOpen] = useState(false);
@@ -39,13 +39,13 @@ const App = (props: { dispatch?: any; alert?: any }) => {
             </Router>
           </div>
         </BrowserRouter>
-        {alert.message && (
+        {/* {alert.message && (
           <React.Fragment>
             <Snackbar open={open} autoHideDuration={1000}>
               <SnackBarAlert severity="success">{alert.message}</SnackBarAlert>
             </Snackbar>
           </React.Fragment>
-        )}
+        )} */}
       </div>
     </div>
   );

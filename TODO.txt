@@ -6,10 +6,12 @@ DONE - 5) overhaul css (don't use prebuilt)
 	-material UI -> custom css
 7) introduce type script
 8) Make four branches with different UI and utilize responsive design and breakpoints
-	a) Bootstrap
+	a) material UI
+	   - Find an example of a console with material ui for good design 
+	   - Use cards instead of table for play list
 	b) scss (no bootstrap)
 	c) styled components
-	d) material UI
+	d) pure css
 7) add ARIA (accessibility)
 8) Increase performance - lighthouse
 9) Add testing 

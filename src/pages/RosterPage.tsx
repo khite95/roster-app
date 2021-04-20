@@ -14,6 +14,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import { Grid } from '@material-ui/core';
 
 const RosterPage = (props: {
   getAllPlayers?: any;
@@ -45,30 +49,10 @@ const RosterPage = (props: {
           >
             Roster
           </Typography>
-
-          <TableContainer
-            component={Paper}
-            elevation={1}
-            style={{
-              width: '50%',
-              backgroundColor: '#fafafa'
-            }}
-            className={classes.table}
-            aria-label="simple table"
-          >
-            <TableHead>
-              <TableRow>
-                <TableCell>#</TableCell>
-                <TableCell align="right">First Name</TableCell>
-                <TableCell align="right">Last Name</TableCell>
-                <TableCell align="right">Rating</TableCell>
-                <TableCell align="right">Handedness</TableCell>
-                <TableCell align="right">Player ID</TableCell>
-              </TableRow>
-            </TableHead>
-            {players.players && (
-              <React.Fragment>
-                <TableBody>
+          <Container className={classes.cardGrid} maxWidth="md">
+            <Grid container spacing={3}>
+              {players.players && (
+                <React.Fragment>
                   {players.players.map(
                     (
                       player: {
@@ -80,22 +64,24 @@ const RosterPage = (props: {
                       },
                       index: number
                     ) => (
-                      <Player
-                        key={player.last_name}
-                        playerProp={player}
-                        handleDeletePlayer={() => {
-                          // this.props.handleDeletePlayer(player.id);
-                          // Using the last name as a key to delete from table
-                          props.handleDeletePlayer(player.last_name);
-                        }}
-                        index={index}
-                      />
+                      <Grid item key={player.last_name} xs={12} sm={6} md={4}>
+                        <Player
+                          key={player.last_name}
+                          playerProp={player}
+                          handleDeletePlayer={() => {
+                            // this.props.handleDeletePlayer(player.id);
+                            // Using the last name as a key to delete from table
+                            props.handleDeletePlayer(player.last_name);
+                          }}
+                          index={index}
+                        />
+                      </Grid>
                     )
                   )}
-                </TableBody>
-              </React.Fragment>
-            )}
-          </TableContainer>
+                </React.Fragment>
+              )}
+            </Grid>
+          </Container>
         </div>
       </Container>
     </React.Fragment>

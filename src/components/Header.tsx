@@ -1,68 +1,214 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+//import { useStyles } from '../styles';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { useStyles } from '../styles';
+import {
+  makeStyles,
+  useTheme,
+  Theme,
+  createStyles
+} from '@material-ui/core/styles';
+import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
+import Hidden from '@material-ui/core/Hidden';
+import IconButton from '@material-ui/core/IconButton';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import MailIcon from '@material-ui/icons/Mail';
+import MenuIcon from '@material-ui/icons/Menu';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import MoreIcon from '@material-ui/icons/MoreVert';
+import { Grid } from '@material-ui/core';
 
-export const Header = (): JSX.Element => {
+const drawerWidth = 240;
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      display: 'flex'
+    },
+    drawer: {
+      [theme.breakpoints.up('lg')]: {
+        width: drawerWidth,
+        flexShrink: 0
+      }
+    },
+    appBar: {
+      [theme.breakpoints.up('lg')]: {
+        width: `calc(100% - ${drawerWidth}px)`,
+        marginLeft: drawerWidth
+      }
+    },
+    menuButton: {
+      marginRight: theme.spacing(2),
+      [theme.breakpoints.up('lg')]: {
+        display: 'none'
+      }
+    },
+    // necessary for content to be below app bar
+    toolbar: theme.mixins.toolbar,
+    drawerPaper: {
+      width: drawerWidth
+    },
+    content: {
+      flexGrow: 1,
+      padding: theme.spacing(5)
+    },
+    typography: {
+      flex: 1
+    },
+    link: {
+      margin: theme.spacing(1, 1.5),
+      underline: 'hover'
+    },
+    button: {
+      [theme.breakpoints.down('sm')]: {
+        display: 'none'
+      }
+    }
+  })
+);
+
+export const Header = (props: any): JSX.Element => {
+  const { window } = props;
   const classes = useStyles();
+  const theme = useTheme();
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const drawer = (
+    <div>
+      <div className={classes.toolbar} />
+      <Divider />
+      <List>
+        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>
+              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>
+              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+    </div>
+  );
+
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
+
   return (
-    <AppBar
-      position="static"
-      color="default"
-      elevation={0}
-      className={classes.appBar}
-    >
-      <Toolbar className={classes.toolbar}>
-        <Typography
-          variant="h6"
-          color="inherit"
-          noWrap
-          className={classes.toolbarTitle}
-        >
-          <Button
-            color="primary"
-            variant="contained"
-            component={Link}
-            to="/roster"
-            className="navbar-brand"
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar
+        position="fixed"
+        color="default"
+        elevation={1}
+        className={classes.appBar}
+      >
+        <Toolbar className={classes.toolbar}>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            className={classes.menuButton}
           >
-            Player App
-          </Button>
-        </Typography>
-        <nav>
-          <Button
-            variant="contained"
-            component={Link}
-            to="/roster"
-            className={classes.link}
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" className={classes.typography} noWrap>
+            Roster Management App
+          </Typography>
+          <nav>
+            <Grid className={classes.button}>
+              <Button
+                variant="contained"
+                component={Link}
+                to="/roster"
+                className={classes.link}
+              >
+                Roster
+              </Button>
+              <Button
+                variant="contained"
+                component={Link}
+                to="/player/new"
+                className={classes.link}
+              >
+                Add New Player
+              </Button>
+              <Button
+                variant="contained"
+                component={Link}
+                to="https://github.com/khite95/roster-app"
+                className={classes.link}
+              >
+                Github
+              </Button>
+
+              <Button
+                color="primary"
+                variant="outlined"
+                component={Link}
+                to="/login"
+                className={classes.link}
+              >
+                Logout
+              </Button>
+            </Grid>
+          </nav>
+        </Toolbar>
+      </AppBar>
+      <nav className={classes.drawer} aria-label="mailbox folders">
+        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+        <Hidden mdUp implementation="css">
+          <Drawer
+            container={container}
+            variant="temporary"
+            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            classes={{
+              paper: classes.drawerPaper
+            }}
+            ModalProps={{
+              keepMounted: true // Better open performance on mobile.
+            }}
           >
-            Roster
-          </Button>
-          <Button
-            variant="contained"
-            component={Link}
-            to="/player/new"
-            className={classes.link}
+            {drawer}
+          </Drawer>
+        </Hidden>
+        <Hidden mdDown implementation="css">
+          <Drawer
+            classes={{
+              paper: classes.drawerPaper
+            }}
+            variant="permanent"
+            open
           >
-            Add New Player
-          </Button>
-          <Button variant="text" className={classes.link}>
-            <Link to="https://github.com/khite95/roster-app">Github</Link>
-          </Button>
-        </nav>
-        <Button
-          color="primary"
-          variant="outlined"
-          component={Link}
-          to="/login"
-          className={classes.link}
-        >
-          Logout
-        </Button>
-      </Toolbar>
-    </AppBar>
+            {drawer}
+          </Drawer>
+        </Hidden>
+      </nav>
+    </div>
   );
 };

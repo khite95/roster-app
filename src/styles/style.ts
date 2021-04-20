@@ -1,8 +1,13 @@
 import { makeStyles } from '@material-ui/core/styles';
 
+const drawerWidth = 240;
+
 export const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex'
+  },
   avatar: {
-    margin: theme.spacing(1),
+    marginTop: theme.spacing(7),
     backgroundColor: '#3f51b5'
   },
   paper: {
@@ -25,12 +30,6 @@ export const useStyles = makeStyles((theme) => ({
     overflowX: 'hidden',
     backgroundColor: '#fafafa'
   },
-  appBar: {
-    borderBottom: `1px solid ${theme.palette.divider}`
-  },
-  toolbar: {
-    flexWrap: 'wrap'
-  },
   toolbarTitle: {
     flexGrow: 1
   },
@@ -46,6 +45,50 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(4)
   },
   typography: {
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(0)
+  },
+  title: {
+    fontSize: 14
+  },
+  pos: {
+    marginBottom: 12
+  },
+  cardGrid: {
+    paddingTop: theme.spacing(8),
+    paddingBottom: theme.spacing(8)
+  },
+  card: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  cardContent: {
+    flexGrow: 1
+  },
+  drawer: {
+    [theme.breakpoints.up('sm')]: {
+      width: drawerWidth,
+      flexShrink: 0
+    }
+  },
+  appBar: {
+    [theme.breakpoints.up('sm')]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth
+    }
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      display: 'none'
+    }
+  },
+  // necessary for content to be below app bar
+  drawerPaper: {
+    width: drawerWidth
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3)
   }
 }));

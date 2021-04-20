@@ -4,6 +4,10 @@ import Avatar from '@material-ui/core/Avatar';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import { Button, Typography } from '@material-ui/core';
 
 interface PlayerProps {
   playerProp: {
@@ -30,26 +34,27 @@ export const Player = ({
   // Using the last name as a key to delete from table
   return (
     <React.Fragment>
-      <TableRow key={playerProp.last_name}>
-        <TableCell component="th" scope="row">
-          {index}
-        </TableCell>
-        <TableCell align="center">{playerProp.first_name}</TableCell>
-        <TableCell align="center">{playerProp.last_name}</TableCell>
-        <TableCell align="center">{playerProp.rating}</TableCell>
-        <TableCell align="center">{playerProp.handedness}</TableCell>
-        <TableCell align="center">{playerProp.id}</TableCell>
-        <TableCell
-          align="right"
-          id="delete"
-          className="delete"
-          onClick={handleDeletePlayer}
-        >
-          <Avatar className={classes.avatar}>
+      <Card className={classes.root} variant="outlined">
+        <CardContent>
+          <Typography variant="body2" component="p">
+            ID: {playerProp.id}
+          </Typography>
+          <Typography className={classes.title} color="primary" gutterBottom>
+            {playerProp.first_name + ' ' + playerProp.last_name}
+          </Typography>
+          <Typography variant="h5" component="h2">
+            Rated: {playerProp.rating}
+          </Typography>
+          <Typography className={classes.pos} color="textSecondary">
+            Handedness: {playerProp.handedness}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Avatar onClick={handleDeletePlayer}>
             <DeleteOutlineOutlinedIcon />
           </Avatar>
-        </TableCell>
-      </TableRow>
+        </CardActions>
+      </Card>
     </React.Fragment>
   );
 };
