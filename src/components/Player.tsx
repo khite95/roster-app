@@ -36,17 +36,17 @@ export const Player = ({
     <React.Fragment>
       <Card className={classes.root} variant="outlined">
         <CardContent>
-          <Typography variant="body2" component="p">
-            ID: {playerProp.id}
-          </Typography>
-          <Typography className={classes.title} color="primary" gutterBottom>
+          <Typography variant="h5" component="h2">
             {playerProp.first_name + ' ' + playerProp.last_name}
           </Typography>
-          <Typography variant="h5" component="h2">
-            Rated: {playerProp.rating}
+          <Typography variant="body1" component="p">
+            Rated {playerProp.rating}
+          </Typography>
+          <Typography className={classes.title} color="primary" gutterBottom>
+            Handedness: {playerProp.handedness}
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
-            Handedness: {playerProp.handedness}
+            ID: {playerProp.id}
           </Typography>
         </CardContent>
         <CardActions>

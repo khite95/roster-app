@@ -149,7 +149,7 @@ export const Header = (props: any): JSX.Element => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.typography} noWrap>
-            Roster Management App
+            Roster Management
           </Typography>
           <nav>
             <Grid className={classes.button}>
