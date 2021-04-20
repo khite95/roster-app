@@ -1,6 +1,8 @@
 # Player Management App
 
-https://sad-goldberg-300a3b.netlify.app/
+Web Demo:
+
+https://playermanagement.netlify.app/
 
 ## Overview
 
