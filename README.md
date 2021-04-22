@@ -6,7 +6,7 @@ https://playermanagement.netlify.app/
 
 ## Overview
 
-This is an front end player management app built with React and Redux. You can register a new account, login, and manage a player roster. 
+This is an front end player management app built with React, Typescript, and Redux. You can register a new account, login, and manage a player roster. 
 
 ## Getting Started
 
