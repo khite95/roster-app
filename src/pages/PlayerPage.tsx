@@ -76,7 +76,7 @@ const PlayerPage = (props: { dispatch?: any; addingPlayer?: any }) => {
           <Typography component="h1" variant="h5">
             Add New Player
           </Typography>
-          <form className={classes.form} noValidate onSubmit={handleSubmit}>
+          <form className={classes.form} onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -150,9 +150,6 @@ const PlayerPage = (props: { dispatch?: any; addingPlayer?: any }) => {
             </Grid>
           </form>
         </div>
-        <Box mt={5}>
-          <Copyright />
-        </Box>
       </Container>
     </React.Fragment>
   );

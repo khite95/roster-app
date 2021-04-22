@@ -50,7 +50,7 @@ const LoginPage = (props: { dispatch?: any; loggingIn?: any }) => {
         <Typography component="h1" variant="h5">
           Roster App - Sign in
         </Typography>
-        <form className={classes.form} noValidate onSubmit={handleSubmit}>
+        <form className={classes.form} onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
