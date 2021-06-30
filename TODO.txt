@@ -1,23 +1,17 @@
-DONE - 1) Fix all broken endpoints by returning local data wrapped in promises --YOUR APP SHOULD ROUGHLY FUNCTION AGAIN AT THIS POINT--
-DONE - 2) Replace all code involving promises, or 'then/catch' with async await (we can work on this together if you have questions)
-DONE - 3) Go back to the original goal of cleaning up your render code (DO NOT START WITH HOOKS YET)
-DONE - 4) If you reach this point, everything will be refactored, and you can start converting all of your react classes to hook based counterparts
-DONE - 5) overhaul css (don't use prebuilt)
-	-material UI -> custom css
-6) Implement user registration and auth
-7) introduce type script
-8) Make four branches with different UI and utilize responsive design and breakpoints
+- Implement user registration and auth
+- Introduce type script
+- Make four branches with different UI and utilize responsive design and breakpoints
 	a) material UI
 	   - Find an example of a console with material ui for good design 
 	   - Use cards instead of table for play list
 	b) scss (no bootstrap)
 	c) styled components
 	d) pure css
-7) add ARIA (accessibility)
-8) Increase performance - lighthouse
-9) Add testing 
+- Add ARIA
+- Increase performance - lighthouse
+- Add testing 
 	a) React testing library
 	b) unit
 	c) integration
 	d) e2e tests
-10) Replace redux with apollo client and graphql
+- Replace redux with apollo client and graphql
